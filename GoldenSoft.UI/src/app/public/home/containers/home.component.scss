@@ -1,0 +1,30 @@
+/* ... */
+::ng-deep .dx-overlay-content {
+    background-color: lightgray;
+}
+
+::ng-deep {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+::ng-deep #toolbar {
+    background-color: rgba(235, 19, 19, 0.795);
+    padding: 5px 10px;
+ 
+}
+::ng-deep .dx-toolbar-button .dx-button {
+    background-color:  rgba(191, 191, 191, -0.15);
+    border: none;
+}
+::ng-deep .dx-toolbar-button > .dx-toolbar-item-content {
+    margin-left: -7px;
+}
+
+::ng-deep .dx-list-item-icon {
+    margin-right: 10px;
+}
+::ng-deep #view {
+    margin-left: 10px;
+    margin-top: 10px;
+}

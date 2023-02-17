@@ -1,0 +1,39 @@
+<dx-toolbar id="toolbar">
+    <dxi-item
+        widget="dxButton"
+        [options]="buttonOptions"
+        location="before">
+    </dxi-item>
+</dx-toolbar>
+
+<dx-drawer
+    template="template"
+    [height]="400"
+    [minSize]="37"
+    revealMode="expand"
+    openedStateMode="overlap"
+    [(opened)]="isDrawerOpen"
+    style="background-color: antiquewhite;">
+    <div *dxTemplate="let data of 'template'">
+        <dx-list 
+            [items] = "navigation" 
+            [width]="240"
+            selectionMode="single"
+            (onSelectionChanged)="this.isDrawerOpen = false"
+            itemTemplate="links">
+            <div *dxTemplate="let link of 'links'">
+                <a [routerLink]="['/' + link.path]">
+                    <div>
+                        <div class="dx-list-item-icon-container">
+                            <i class="dx-icon dx-list-item-icon dx-icon-{{link.icon}}"></i>
+                        </div>
+                        <span>{{link.text}}</span>
+                    </div>
+                </a>
+            </div>
+        </dx-list>
+    </div>
+    <div id="view">
+        <router-outlet></router-outlet>
+    </div>
+</dx-drawer>
