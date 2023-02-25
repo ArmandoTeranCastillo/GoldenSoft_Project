@@ -13,10 +13,9 @@ namespace GoldenSoftAPI.Models.InventorySystem
         //Relationships
         [JsonIgnore] 
         public Inventory inventory { get; set; }
-        [JsonIgnore]
+       
         public InventoryReasonIssues reasonIssues { get; set; }
 
         public int inventoryId { get; set; }
-        public int reasonIssuesId { get; set; }
     }
 }

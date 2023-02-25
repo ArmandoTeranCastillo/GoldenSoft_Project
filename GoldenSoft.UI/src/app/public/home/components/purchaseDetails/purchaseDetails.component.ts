@@ -8,16 +8,25 @@ import { PublicService } from "src/app/public/public.service";
 })
 export class PurchaseDetailsComponent implements OnInit {
     purchasedetails;
+    purchaseorder;
 
     constructor(private publicService: PublicService) {}
 
     ngOnInit(): void {
         this.getPurchaseDetails();
+        this.getPurchaseOrder();
     }
 
     getPurchaseDetails(){
         this.publicService.getPurchaseDetails().subscribe(
             response => this.purchasedetails = response,
+            error => console.log(error)
+            )  
+    }
+
+    getPurchaseOrder(){
+        this.publicService.getPurchaseOrder().subscribe(
+            response => this.purchaseorder = response,
             error => console.log(error)
             )  
     }

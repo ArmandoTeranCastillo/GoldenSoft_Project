@@ -14,8 +14,10 @@
     (onRowUpdated)="updatePurchaseDetails($event)"
     (onRowRemoved)="deletePurchaseDetails($event)"
     >
-    <dxi-column dataField="details" fixed="true"></dxi-column>
-    <dxi-column dataField="purchaseOrderId" fixed="true"></dxi-column>
+    <dxi-column dataField="details" caption="Detalles" fixed="true"></dxi-column>
+    <dxi-column dataField="purchaseOrderId" caption="Órden de Compra" fixed="true">
+        <dxo-lookup [dataSource]="purchaseorder" valueExpr="id" displayExpr="id"></dxo-lookup>
+    </dxi-column>
 
     <dxo-editing
         mode="row"   

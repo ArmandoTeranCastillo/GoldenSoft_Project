@@ -14,8 +14,9 @@
     (onRowUpdated)="updatePurchaseOrder($event)"
     (onRowRemoved)="deletePurchaseOrder($event)"
     >
-    <dxi-column dataField="producer" fixed="true"></dxi-column>
-    <dxi-column dataField="dateOrder" fixed="true"></dxi-column>
+    <dxi-column dataField="id" caption="ID" fixed="true" [allowEditing]="false"></dxi-column>
+    <dxi-column dataField="producer" caption="Productor" fixed="true"></dxi-column>
+    <dxi-column dataField="dateOrder" caption="Fecha de Compra" fixed="true"></dxi-column>
 
     <dxo-editing
         mode="row"   

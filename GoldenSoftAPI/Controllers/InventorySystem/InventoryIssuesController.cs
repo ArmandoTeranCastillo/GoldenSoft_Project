@@ -20,7 +20,11 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
         [HttpGet]
         public async Task<ActionResult<List<InventoryIssues>>> GetAll()
         {
-            return Ok(await _context.inventoryIssues.ToListAsync());
+            var inventoryissues = await _context.inventoryIssues
+                .Include(i => i.reasonIssues)
+                .ToListAsync();
+
+            return Ok(inventoryissues);
         }
 
         [HttpGet("id")]

@@ -14,22 +14,30 @@
     (onRowUpdated)="updateInventory($event)"
     (onRowRemoved)="deleteInventory($event)"
     >
-    <dxi-column 
-    dataField="numberPallet" 
-    fixed="true" ></dxi-column>
-    <dxi-column dataField="numberBatch" fixed="true"></dxi-column>
-    <dxi-column 
-        dataField="date"
-        fixed="true"
-    ></dxi-column>
-    <dxi-column dataField="numberBoxes" fixed="true"></dxi-column>
-    <dxi-column dataField="barcode" fixed="true"></dxi-column>
-    <dxi-column dataField="caliberId" fixed="true"></dxi-column>
-    <dxi-column dataField="varietyId" fixed="true"></dxi-column>
-    <dxi-column dataField="qualityId" fixed="true"></dxi-column>
-    <dxi-column dataField="typeBoxId" fixed="true"></dxi-column>
-    <dxi-column dataField="clientId" fixed="true"></dxi-column>
-    <dxi-column dataField="purchaseOrderId" fixed="true"></dxi-column>
+    <dxi-column dataField="id" caption="Registro" fixed="true" [allowEditing]="false" ></dxi-column>
+    <dxi-column dataField="numberPallet" caption="Tarima" fixed="true" ></dxi-column>
+    <dxi-column dataField="numberBatch" caption="No.Lote" fixed="true"></dxi-column>
+    <dxi-column dataField="date" caption="Fecha" fixed="true"></dxi-column>
+    <dxi-column dataField="numberBoxes" caption="No.Caja" fixed="true"></dxi-column>
+    <dxi-column dataField="barcode" caption="Código" fixed="true"></dxi-column>
+    <dxi-column dataField="caliber.id" caption="Calibre" fixed="true">
+        <dxo-lookup [dataSource]="calibers" valueExpr="id" displayExpr="nameCaliber"></dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="variety.id" caption="Variedad" fixed="true">
+        <dxo-lookup [dataSource]="variety" valueExpr="id" displayExpr="nameVariety"></dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="quality.id" caption="Calidad" fixed="true">
+        <dxo-lookup [dataSource]="quality" valueExpr="id" displayExpr="nameQuality"></dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="typeBox.id" caption="Tipo de Caja" fixed="true">
+        <dxo-lookup [dataSource]="typebox" valueExpr="id" displayExpr="nameTypeBox"></dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="client.id" caption="Cliente" fixed="true">
+        <dxo-lookup [dataSource]="client" valueExpr="id" displayExpr="name"></dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="purchaseOrder.id" caption="Órden de Compra" fixed="true">
+        <dxo-lookup [dataSource]="purchaseorder" valueExpr="id" displayExpr="id"></dxo-lookup>
+    </dxi-column>
 
     <dxo-editing
         mode="row"   

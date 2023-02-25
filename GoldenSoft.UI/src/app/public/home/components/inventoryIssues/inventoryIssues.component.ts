@@ -7,12 +7,16 @@ import { PublicService } from "src/app/public/public.service";
     styleUrls: ['inventoryIssues.component.scss']
 })
 export class InventoryIssuesComponent implements OnInit{
+    inventory;
     inventoryissues;
+    inventoryreasonissues;
 
     constructor(private publicService: PublicService) {}
 
     ngOnInit(): void {
         this.getInventoryIssues();
+        this.getInventoryReasonIssues();
+        this.getInventory();
     }
 
     getInventoryIssues(){
@@ -22,8 +26,37 @@ export class InventoryIssuesComponent implements OnInit{
             ) 
     }
 
+    getInventoryReasonIssues(){
+        this.publicService.getInventoryReasonIssues().subscribe(
+            response => this.inventoryreasonissues = response,
+            error => console.log(error)
+            ) 
+    }
+
+    getInventory(){
+        this.publicService.getInventory().subscribe(
+            response => this.inventory = response,
+            error => console.log(error)
+            ) 
+    }
+
     createInventoryIssues(e){
-        this.publicService.createInventoryIssues(e.data).subscribe(
+        const {
+            numberIssues,
+            dateIssue,
+            inventoryId
+        } = e.data
+
+        const reasonIssuesId = e.data.reasonIssues.id
+
+        const dataToSend = {
+            numberIssues,
+            dateIssue,
+            inventoryId,
+            reasonIssuesId
+        }
+
+        this.publicService.createInventoryIssues(dataToSend).subscribe(
             response => {
                 console.log(response);
             }
@@ -31,7 +64,24 @@ export class InventoryIssuesComponent implements OnInit{
     }
 
     updateInventoryIssues(e){
-        this.publicService.updateInventoryIssues(e.data).subscribe(
+        const {
+            id,
+            numberIssues,
+            dateIssue,
+            inventoryId
+        } = e.data
+
+        const reasonIssuesId = e.data.reasonIssues.id
+
+        const dataToSend = {
+            id,
+            numberIssues,
+            inventoryId,
+            dateIssue,
+            reasonIssuesId
+        }
+
+        this.publicService.updateInventoryIssues(dataToSend).subscribe(
             response => {
                 console.log(response);
             }
