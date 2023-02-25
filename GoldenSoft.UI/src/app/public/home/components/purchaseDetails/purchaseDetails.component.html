@@ -1,1 +1,27 @@
-<div>Esta es la tabla de detalles de las compras</div>
+<div class="long-title">
+    <h3>Tabla de Detalles de Compra</h3>
+</div>
+
+<dx-data-grid 
+    id="dataGrid"
+    [dataSource]="purchasedetails"
+    keyExpr="id"
+    [allowColumnReordering]="false"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
+    [showRowLines]= "true"
+    (onRowInserted)="createPurchaseDetails($event)"
+    (onRowUpdated)="updatePurchaseDetails($event)"
+    (onRowRemoved)="deletePurchaseDetails($event)"
+    >
+    <dxi-column dataField="details" fixed="true"></dxi-column>
+    <dxi-column dataField="purchaseOrderId" fixed="true"></dxi-column>
+
+    <dxo-editing
+        mode="row"   
+        [allowUpdating]="true"
+        [allowAdding]="true"
+        [allowDeleting]="true"
+        [confirmDelete]="true">
+    </dxo-editing>
+</dx-data-grid>

@@ -1,4 +1,4 @@
-﻿namespace GoldenSoftAPI
+﻿namespace GoldenSoftAPI.Models.InventorySystem
 {
     public class PurchaseOrder
     {

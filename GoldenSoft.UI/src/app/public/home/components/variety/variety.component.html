@@ -1,1 +1,26 @@
-<div>Esta es la tabla de variedades</div>
+<div class="long-title">
+    <h3>Tabla de Variedades</h3>
+</div>
+
+<dx-data-grid 
+    id="dataGrid"
+    [dataSource]="variety"
+    keyExpr="id"
+    [allowColumnReordering]="false"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
+    [showRowLines]="true"
+    (onRowInserted)="createVariety($event)"
+    (onRowUpdated)="updateVariety($event)"
+    (onRowRemoved)="deleteVariety($event)"
+    >
+    <dxi-column dataField="nameVariety" fixed="true"></dxi-column>
+
+    <dxo-editing
+        mode="row"   
+        [allowUpdating]="true"
+        [allowAdding]="true"
+        [allowDeleting]="true"
+        [confirmDelete]="true">
+    </dxo-editing>
+</dx-data-grid>

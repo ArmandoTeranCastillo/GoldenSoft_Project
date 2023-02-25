@@ -1,1 +1,26 @@
-<div>Esta es la tabla de tipos de caja</div>
+<div class="long-title">
+    <h3>Tabla de Tipos de Caja</h3>
+</div>
+
+<dx-data-grid 
+    id="dataGrid"
+    [dataSource]="typebox"
+    keyExpr="id"
+    [allowColumnReordering]="false"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
+    [showRowLines]="true"
+    (onRowInserted)="createTypeBox($event)"
+    (onRowUpdated)="updateTypeBox($event)"
+    (onRowRemoved)="deleteTypeBox($event)"
+    >
+    <dxi-column dataField="nameTypeBox" fixed="true"></dxi-column>
+
+    <dxo-editing
+        mode="row"   
+        [allowUpdating]="true"
+        [allowAdding]="true"
+        [allowDeleting]="true"
+        [confirmDelete]="true">
+    </dxo-editing>
+</dx-data-grid>

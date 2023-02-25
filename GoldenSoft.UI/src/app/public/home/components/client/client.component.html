@@ -1,1 +1,26 @@
-<div>Esta es la tabla de clientes</div>
+<div class="long-title">
+    <h3>Tabla de Clientes</h3>
+</div>
+
+<dx-data-grid 
+    id="dataGrid"
+    [dataSource]="clients"
+    keyExpr="id"
+    [allowColumnReordering]="false"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
+    [showRowLines]= "true"
+    (onRowInserted)="createClients($event)"
+    (onRowUpdated)="updateClient($event)"
+    (onRowRemoved)="deleteClient($event)"
+    >
+    <dxi-column dataField="name" fixed="true"></dxi-column>
+
+    <dxo-editing
+        mode="row"   
+        [allowUpdating]="true"
+        [allowAdding]="true"
+        [allowDeleting]="true"
+        [confirmDelete]="true">
+    </dxo-editing>
+</dx-data-grid>

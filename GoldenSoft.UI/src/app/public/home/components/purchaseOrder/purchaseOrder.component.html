@@ -1,1 +1,27 @@
-<div>Esta es la tabla de ordenes de compra</div>
+<div class="long-title">
+    <h3>Tabla de Órdenes de Compra</h3>
+</div>
+
+<dx-data-grid 
+    id="dataGrid"
+    [dataSource]="purchaseorder"
+    keyExpr="id"
+    [allowColumnReordering]="false"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
+    [showRowLines]= "true"
+    (onRowInserted)="createPurchaseOrder($event)"
+    (onRowUpdated)="updatePurchaseOrder($event)"
+    (onRowRemoved)="deletePurchaseOrder($event)"
+    >
+    <dxi-column dataField="producer" fixed="true"></dxi-column>
+    <dxi-column dataField="dateOrder" fixed="true"></dxi-column>
+
+    <dxo-editing
+        mode="row"   
+        [allowUpdating]="true"
+        [allowAdding]="true"
+        [allowDeleting]="true"
+        [confirmDelete]="true">
+    </dxo-editing>
+</dx-data-grid>

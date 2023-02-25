@@ -1,1 +1,26 @@
-<div>Esta es la tabla de tamaños</div>
+<div class="long-title">
+    <h3>Tabla de Calibres</h3>
+</div>
+
+<dx-data-grid 
+    id="dataGrid"
+    [dataSource]="calibers"
+    keyExpr="id"
+    [allowColumnReordering]="false"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
+    [showRowLines]= "true"
+    (onRowInserted)="createCaliber($event)"
+    (onRowUpdated)="updateCaliber($event)"
+    (onRowRemoved)="deleteCaliber($event)"
+    >
+    <dxi-column dataField="nameCaliber" fixed="true"></dxi-column>
+
+    <dxo-editing
+        mode="row"   
+        [allowUpdating]="true"
+        [allowAdding]="true"
+        [allowDeleting]="true"
+        [confirmDelete]="true">
+    </dxo-editing>
+</dx-data-grid>

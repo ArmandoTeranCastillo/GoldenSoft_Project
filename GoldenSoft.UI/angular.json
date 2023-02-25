@@ -69,7 +69,8 @@
               "browserTarget": "GoldenSoft.UI:build:production"
             },
             "development": {
-              "browserTarget": "GoldenSoft.UI:build:development"
+              "browserTarget": "GoldenSoft.UI:build:development",
+              "proxyConfig": "./proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

@@ -1,25 +1,42 @@
+<div class="long-title">
+    <h3>Tabla de Inventario</h3>
+</div>
+
 <dx-data-grid 
     id="dataGrid"
+    [dataSource]="inventory"
+    keyExpr="id"
     [allowColumnReordering]="false"
     [allowColumnResizing]="true"
     [columnAutoWidth]="true"
+    [showRowLines]= "true"
+    (onRowInserted)="createInventory($event)"
+    (onRowUpdated)="updateInventory($event)"
+    (onRowRemoved)="deleteInventory($event)"
     >
-    <dxi-column dataField="Tarima" fixed="true"></dxi-column>
-    <dxi-column dataField="Lote" fixed="true"></dxi-column>
     <dxi-column 
-        dataField="Fecha"
-        dataType="date"
+    dataField="numberPallet" 
+    fixed="true" ></dxi-column>
+    <dxi-column dataField="numberBatch" fixed="true"></dxi-column>
+    <dxi-column 
+        dataField="date"
         fixed="true"
     ></dxi-column>
-    <dxi-column dataField="Número de Caja" fixed="true"></dxi-column>
-    <dxi-column dataField="Código" fixed="true"></dxi-column>
-    <dxi-column dataField="Calibre" fixed="true"></dxi-column>
-    <dxi-column dataField="Variedad" fixed="true"></dxi-column>
-    <dxi-column dataField="Calidad" fixed="true"></dxi-column>
-    <dxi-column dataField="Tipo de Caja" fixed="true"></dxi-column>
-    <dxi-column dataField="Cliente" fixed="true"></dxi-column>
-    <dxi-column dataField="Orden de Compra" fixed="true"></dxi-column>
+    <dxi-column dataField="numberBoxes" fixed="true"></dxi-column>
+    <dxi-column dataField="barcode" fixed="true"></dxi-column>
+    <dxi-column dataField="caliberId" fixed="true"></dxi-column>
+    <dxi-column dataField="varietyId" fixed="true"></dxi-column>
+    <dxi-column dataField="qualityId" fixed="true"></dxi-column>
+    <dxi-column dataField="typeBoxId" fixed="true"></dxi-column>
+    <dxi-column dataField="clientId" fixed="true"></dxi-column>
+    <dxi-column dataField="purchaseOrderId" fixed="true"></dxi-column>
 
-
+    <dxo-editing
+        mode="row"   
+        [allowUpdating]="true"
+        [allowAdding]="true"
+        [allowDeleting]="true"
+        [confirmDelete]="true">
+    </dxo-editing>
 
 </dx-data-grid>

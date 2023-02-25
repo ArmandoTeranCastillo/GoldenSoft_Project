@@ -9,6 +9,7 @@ import { DxDataGridModule } from "devextreme-angular";
 
 
 import { NotFoundComponent } from "./components/not-found/not-found.component";
+import { CommonModule } from "@angular/common";
 
 //Estructura básica para la creación de Modulos (Porciones de código)
 //Esta estructura es muy importante para globalizar modulos
@@ -18,6 +19,7 @@ import { NotFoundComponent } from "./components/not-found/not-found.component";
     imports: [
         HttpClientModule,
         RouterModule,
+        CommonModule,
         DxDrawerModule,
         DxToolbarModule,
         DxButtonModule,

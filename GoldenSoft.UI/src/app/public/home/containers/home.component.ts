@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PublicService } from '../../public.service';
 
 @Component({
     selector: 'app-home',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class HomeComponent implements OnInit {
+    
+
     navigation: any[] = [
         {id: 1, text: "Inventario", icon: "box", path: "home/inventory"},
         {id: 2, text: "Clientes", icon: "group", path: "home/client"},
@@ -30,7 +33,11 @@ export class HomeComponent implements OnInit {
     
     constructor() { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        
+     }
+
+     
 
     
 }

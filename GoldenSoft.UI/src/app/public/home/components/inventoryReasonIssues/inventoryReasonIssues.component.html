@@ -1,1 +1,26 @@
-<div>Esta es la tabla de razones de bajas de inventario</div>
+<div class="long-title">
+    <h3>Tabla de Razones de Baja de Inventario</h3>
+</div>
+
+<dx-data-grid 
+    id="dataGrid"
+    [dataSource]="inventoryreasonissues"
+    keyExpr="id"
+    [allowColumnReordering]="false"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
+    [showRowLines]= "true"
+    (onRowInserted)="createInventoryReasonIssues($event)"
+    (onRowUpdated)="updateInventoryReasonIssues($event)"
+    (onRowRemoved)="deleteInventoryReasonIssues($event)"
+    >
+    <dxi-column dataField="reasons" fixed="true"></dxi-column>
+
+    <dxo-editing
+        mode="row"   
+        [allowUpdating]="true"
+        [allowAdding]="true"
+        [allowDeleting]="true"
+        [confirmDelete]="true">
+    </dxo-editing>
+</dx-data-grid>

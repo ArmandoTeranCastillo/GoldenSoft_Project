@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GoldenSoftAPI.Models.InventorySystem;
+using Microsoft.EntityFrameworkCore;
 
 namespace GoldenSoftAPI.Data
 {
