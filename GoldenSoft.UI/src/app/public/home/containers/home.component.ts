@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PublicService } from '../../public.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-home',
@@ -20,7 +21,8 @@ export class HomeComponent implements OnInit {
         {id: 7, text: "Órdenes de Compra", icon: "importselected", path: "home/purchaseOrder"},
         {id: 8, text: "Detalles de las Compras", icon: "columnchooser", path: "home/purchaseDetails"},
         {id: 9, text: "Bajas de Inventario", icon: "exportpdf", path: "home/inventoryIssues"},
-        {id: 10, text: "Razones de Bajas de Inventario", icon: "columnchooser", path: "home/inventoryReasonIssues"}
+        {id: 10, text: "Razones de Bajas de Inventario", icon: "columnchooser", path: "home/inventoryReasonIssues"},
+        {id: 11, text: "Generador de Código de Barras", icon: "tips", path: "home/barcode"}
     ]
 
     isDrawerOpen: boolean = true;
@@ -31,10 +33,10 @@ export class HomeComponent implements OnInit {
         }
     }
     
-    constructor() { }
+    constructor(private router : Router) { }
 
     ngOnInit() {
-        
+        this.router.navigate(['/home', 'inventory'])
      }
 
      

@@ -16,6 +16,7 @@ import { PurchaseOrderComponent } from "./home/components/purchaseOrder/purchase
 import { PurchaseDetailsComponent } from "./home/components/purchaseDetails/purchaseDetails.component";
 import { InventoryIssuesComponent } from "./home/components/inventoryIssues/inventoryIssues.component";
 import { InventoryReasonIssuesComponent } from "./home/components/inventoryReasonIssues/inventoryReasonIssues.component";
+import { BarcodeComponent } from "./home/components/barcode/barcode.component";
 //Estructura básica para la creación de Modulos (Porciones de código)
 @NgModule({
     imports: [
@@ -36,7 +37,8 @@ import { InventoryReasonIssuesComponent } from "./home/components/inventoryReaso
         PurchaseOrderComponent,
         PurchaseDetailsComponent,
         InventoryIssuesComponent,
-        InventoryReasonIssuesComponent
+        InventoryReasonIssuesComponent,
+        BarcodeComponent
       
     ],
     exports: [],

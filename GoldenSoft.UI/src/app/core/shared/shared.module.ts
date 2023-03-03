@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http"
 import { RouterModule } from "@angular/router";
-import { DxDrawerModule } from "devextreme-angular";
+import { DxDrawerModule, DxFormModule, DxSelectBoxModule } from "devextreme-angular";
 import { DxToolbarModule } from "devextreme-angular";
 import { DxButtonModule } from "devextreme-angular";
 import { DxListModule } from "devextreme-angular";
@@ -24,7 +24,9 @@ import { CommonModule } from "@angular/common";
         DxToolbarModule,
         DxButtonModule,
         DxListModule,
-        DxDataGridModule
+        DxDataGridModule,
+        DxFormModule,
+        DxSelectBoxModule,
     ],
     declarations: [
         NotFoundComponent
@@ -37,6 +39,8 @@ import { CommonModule } from "@angular/common";
         DxButtonModule,
         DxListModule,
         DxDataGridModule,
+        DxFormModule,
+        DxSelectBoxModule,
         NotFoundComponent
     ],
     providers: []

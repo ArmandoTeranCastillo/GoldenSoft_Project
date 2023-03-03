@@ -13,13 +13,14 @@ import { PurchaseOrderComponent } from "../components/purchaseOrder/purchaseOrde
 import { PurchaseDetailsComponent } from "../components/purchaseDetails/purchaseDetails.component";
 import { InventoryIssuesComponent } from "../components/inventoryIssues/inventoryIssues.component";
 import { InventoryReasonIssuesComponent } from "../components/inventoryReasonIssues/inventoryReasonIssues.component";
+import { BarcodeComponent } from "../components/barcode/barcode.component";
 
 const routes: Routes = [
     {
         path: 'home',
         component: HomeComponent,
         children: [
-            {path: '', redirectTo: '/inventory', pathMatch: 'full'},
+            {path: '', redirectTo: 'inventory', pathMatch: 'full'},
             {path: 'inventory', component: InventoryComponent},
             {path: 'client', component: ClientComponent},
             {path: 'caliber', component: CaliberComponent},
@@ -30,6 +31,7 @@ const routes: Routes = [
             {path: 'purchaseDetails', component: PurchaseDetailsComponent},
             {path: 'inventoryIssues', component: InventoryIssuesComponent},
             {path: 'inventoryReasonIssues', component: InventoryReasonIssuesComponent},
+            {path: 'barcode', component: BarcodeComponent},
             {path: '**', component: NotFoundComponent}
         ]
     }

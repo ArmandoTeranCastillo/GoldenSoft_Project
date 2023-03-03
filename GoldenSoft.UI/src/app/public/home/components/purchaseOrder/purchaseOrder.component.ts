@@ -28,6 +28,7 @@ export class PurchaseOrderComponent implements OnInit {
                 console.log(response);
             }
           )
+        e.component.refresh();
     }
 
     updatePurchaseOrder(e){

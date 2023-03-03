@@ -1,0 +1,40 @@
+<div class="long-title">
+    <h3>Generador de Código de Barras</h3>
+</div>
+
+<div style="text-align: center; margin-bottom: 20px;">
+    <img [src]="sanitizerBarcode" alt="Space Untravel" style="width: 400px;">
+</div>
+
+<div id="form" style="margin-bottom: 10px;">
+    <dx-form
+        labelMode="outside"
+        [formData]="box"
+        colCount="2"></dx-form>
+
+    <dx-select-box
+            label="Calibre"
+            displayExpr="nameCaliber"
+            [dataSource]="caliber"></dx-select-box>
+    <dx-select-box
+            label="Variedad"
+            displayExpr="nameVariety"
+            [dataSource]="variety"></dx-select-box>
+    <dx-select-box
+            label="Calidad"
+            displayExpr="nameQuality"
+            [dataSource]="quality"></dx-select-box>
+    <dx-select-box
+            label="Tipo de Caja"
+            displayExpr="nameTypeBox"
+            [dataSource]="typebox"></dx-select-box>
+</div>
+
+<dx-button
+stylingMode="contained"
+type="default"
+[width]="140"
+text="Generar Código"
+></dx-button>
+
+

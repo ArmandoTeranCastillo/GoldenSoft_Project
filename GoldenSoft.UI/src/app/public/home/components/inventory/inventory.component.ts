@@ -113,6 +113,7 @@ export class InventoryComponent implements OnInit {
             console.log(response);
         }
       )
+      e.component.refresh();
     }
 
     updateInventory(e){

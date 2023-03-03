@@ -9,6 +9,8 @@ export class PublicService{
     constructor(private http: HttpClient){}
 
     //Lista de los observadores
+
+    
     //Observador para inventario
     getInventory(): Observable<any>{
         return this.http.get('/api/Inventory').pipe(
@@ -264,6 +266,13 @@ export class PublicService{
         )
     }
  
+    getBarcode(): Observable<Blob>{
+        return this.http.get('/api/Barcode', {responseType: 'blob'}).pipe(
+            tap(console.log),
+            catchError(this.handleError)
+        )
+    }
+
     private handleError(error: Response){
         console.log(error);
         const msg = 'Error status code' + error.status + 'status' + error.statusText;
