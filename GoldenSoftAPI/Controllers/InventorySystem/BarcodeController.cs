@@ -10,10 +10,10 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
     public class BarcodeController : ControllerBase
     {
         [HttpGet]
-        public IActionResult GenerateBarcode()
+        public IActionResult GenerateBarcode(string code)
         {
             Barcode barcode = new Barcode();
-            Image img = barcode.Encode(TYPE.CODE39, "234567", Color.Black, Color.White, 250, 100);
+            Image img = barcode.Encode(TYPE.CODE128, code, Color.Black, Color.White, 250, 100);
             var data = ConvertImageToBites(img);
             return File(data, "image/jpeg");
         }

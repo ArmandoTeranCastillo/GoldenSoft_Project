@@ -2,39 +2,103 @@
     <h3>Generador de Código de Barras</h3>
 </div>
 
-<div style="text-align: center; margin-bottom: 20px;">
-    <img [src]="sanitizerBarcode" alt="Space Untravel" style="width: 400px;">
+<div id="barcode" style="text-align: center; margin-bottom: 20px;">
+    <img [src]="sanitizerBarcode" alt="" style="width: 400px;">
 </div>
 
-<div id="form" style="margin-bottom: 10px;">
+<div class="body" style="margin-bottom: 10px;">
     <dx-form
+        #form
         labelMode="outside"
         [formData]="box"
-        colCount="2"></dx-form>
+        colCount="2">
+    <dxi-item id='lote' dataField="lote">
+        <dx-text-box #dxbatch (onValueChanged)="changeBatch($event)"  required maxLength="3">
+        </dx-text-box>
+    </dxi-item>
+    <dxi-item id='tarima' dataField="tarima">
+        <dx-text-box #dxpallet (onValueChanged)="changePallet($event)" required maxLength="3">
+        </dx-text-box>
+    </dxi-item>
 
-    <dx-select-box
-            label="Calibre"
+    <dxi-item>
+        <dx-select-box
+            #dxcaliber
+            label="Caliber"
             displayExpr="nameCaliber"
-            [dataSource]="caliber"></dx-select-box>
-    <dx-select-box
+            (onValueChanged)="changeCaliber()"
+            [dataSource]="caliber">
+            <dxi-validation-rule type="required" message="El campo es obligatorio"></dxi-validation-rule>
+        </dx-select-box>
+    </dxi-item>
+
+    <dxi-item>
+        <dx-select-box
+            #dxvariety
             label="Variedad"
             displayExpr="nameVariety"
-            [dataSource]="variety"></dx-select-box>
-    <dx-select-box
+            (onValueChanged)="changeVariety()"
+            [dataSource]="variety">
+            <dxi-validation-rule type="required" message="El campo es obligatorio"></dxi-validation-rule>
+    </dx-select-box>
+    </dxi-item>
+
+    <dxi-item>
+        <dx-select-box
+            #dxquality
             label="Calidad"
             displayExpr="nameQuality"
-            [dataSource]="quality"></dx-select-box>
-    <dx-select-box
+            (onValueChanged)="changeQuality()"
+            [dataSource]="quality">
+            <dxi-validation-rule type="required" message="El campo es obligatorio"></dxi-validation-rule>
+    </dx-select-box>
+    </dxi-item>
+
+    <dxi-item>
+        <dx-select-box
+            #dxtypebox
             label="Tipo de Caja"
             displayExpr="nameTypeBox"
-            [dataSource]="typebox"></dx-select-box>
+            (onValueChanged)="changeTypeBox()"
+            [dataSource]="typebox">
+            <dxi-validation-rule type="required" message="El campo es obligatorio"></dxi-validation-rule>
+        </dx-select-box>
+    </dxi-item>
+    </dx-form>
+
+    <dx-button
+    stylingMode="contained"
+    type="default"
+    [width]="140"
+    text="Generar Código"
+    (onClick)="getBarcode()"
+    [disabled]="!(batchvalue && 
+                  palletvalue && 
+                  calibervalue &&
+                  varietyvalue &&
+                  qualityvalue &&
+                  typeboxvalue)"
+    style="margin-right: 5px;"
+></dx-button>
+
+<button [disabled]="!(generateValue)"
+        type="default" 
+        (click) ="printImage()"
+        style="width: 200;">
+        Imprimir
+</button>
+
 </div>
 
-<dx-button
-stylingMode="contained"
-type="default"
-[width]="140"
-text="Generar Código"
-></dx-button>
+
+<!--<dx-button
+    stylingMode="contained"
+    type="default"
+    [width]="140"
+    text="Imprimir"
+    [disabled]="!(generateValue)"
+    printSectionId="barcode"
+    (onClick)="printImage()"
+></dx-button>-->
 
 

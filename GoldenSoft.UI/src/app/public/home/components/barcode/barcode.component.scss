@@ -5,3 +5,18 @@
     text-align: center;
     margin-bottom: 20px;
   }
+
+@media print {
+    body * {
+      display: none;
+    }
+    .barcode * {
+      display: inline;
+    }
+    .barcode {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+  

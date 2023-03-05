@@ -266,9 +266,15 @@ export class PublicService{
         )
     }
  
-    getBarcode(): Observable<Blob>{
-        return this.http.get('/api/Barcode', {responseType: 'blob'}).pipe(
+    getBarcode(data: string): Observable<Blob>{
+        return this.http.get('/api/Barcode?code=' + data, {responseType: 'blob'}).pipe(
             tap(console.log),
+            catchError(this.handleError)
+        )
+    }
+
+    printImage(data:any){
+        this.http.post('/api/Printer', data).pipe(
             catchError(this.handleError)
         )
     }

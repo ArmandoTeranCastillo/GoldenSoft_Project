@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http"
 import { RouterModule } from "@angular/router";
-import { DxDrawerModule, DxFormModule, DxSelectBoxModule } from "devextreme-angular";
+import { DxDrawerModule, DxFormModule, DxSelectBoxModule, DxTextBoxComponent, DxTextBoxModule, DxValidatorModule } from "devextreme-angular";
 import { DxToolbarModule } from "devextreme-angular";
 import { DxButtonModule } from "devextreme-angular";
 import { DxListModule } from "devextreme-angular";
@@ -10,6 +10,7 @@ import { DxDataGridModule } from "devextreme-angular";
 
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { CommonModule } from "@angular/common";
+import { NgxPrinterModule } from "ngx-printer";
 
 //Estructura básica para la creación de Modulos (Porciones de código)
 //Esta estructura es muy importante para globalizar modulos
@@ -27,6 +28,9 @@ import { CommonModule } from "@angular/common";
         DxDataGridModule,
         DxFormModule,
         DxSelectBoxModule,
+        DxValidatorModule,
+        DxTextBoxModule,
+        NgxPrinterModule.forRoot({printOpenWindow: false}),
     ],
     declarations: [
         NotFoundComponent
@@ -41,6 +45,9 @@ import { CommonModule } from "@angular/common";
         DxDataGridModule,
         DxFormModule,
         DxSelectBoxModule,
+        DxTextBoxModule,
+        DxValidatorModule,
+        NgxPrinterModule,
         NotFoundComponent
     ],
     providers: []
