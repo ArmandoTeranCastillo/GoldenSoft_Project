@@ -5,7 +5,7 @@
 <dx-data-grid 
     id="dataGrid"
     [dataSource]="inventory"
-    keyExpr="id"
+    keyExpr="inventoryId"
     [allowColumnReordering]="false"
     [allowColumnResizing]="true"
     [columnAutoWidth]="true"
@@ -14,12 +14,12 @@
     (onRowUpdated)="updateInventory($event)"
     (onRowRemoved)="deleteInventory($event)"
     >
-    <dxi-column dataField="id" caption="Registro" fixed="true" [allowEditing]="false" ></dxi-column>
+    <dxi-column dataField="inventoryId" caption="Registro" fixed="true" [allowEditing]="false" ></dxi-column>
     <dxi-column dataField="numberPallet" caption="Tarima" fixed="true" ></dxi-column>
     <dxi-column dataField="numberBatch" caption="No.Lote" fixed="true"></dxi-column>
     <dxi-column dataField="date" caption="Fecha" fixed="true" dataType="date"></dxi-column>
-    <dxi-column dataField="numberBoxes" caption="No.Cajas(Stock)" fixed="true" [calculateDisplayValue]="getStockColumn"></dxi-column>
-    <dxi-column dataField="issues" [visible]="false"></dxi-column>
+    <dxi-column dataField="noBoxes" caption="No.Cajas(Stock)" fixed="true" [calculateDisplayValue]="getStockColumn"></dxi-column>
+    <dxi-column dataField="noIssues" [visible]="false"></dxi-column>
     <dxi-column dataField="stock" [visible]="false"></dxi-column>
     <dxi-column dataField="barcode" caption="Código" fixed="true"></dxi-column>
     <dxi-column dataField="caliber.id" caption="Calibre" fixed="true">
@@ -57,8 +57,8 @@
                 <dxi-item dataField="numberPallet" ></dxi-item>
                 <dxi-item dataField="numberBatch" ></dxi-item>
                 <dxi-item dataField="date"></dxi-item>
-                <dxi-item dataField="numberBoxes" [label]="titleBoxes"></dxi-item>
-                <dxi-item dataField="issues" [label]="titleIssues" [disabled]="true"></dxi-item>
+                <dxi-item dataField="noBoxes" [label]="titleBoxes"></dxi-item>
+                <dxi-item dataField="noIssues" [label]="titleIssues" [disabled]="true"></dxi-item>
                 <dxi-item dataField="barcode"></dxi-item>
                 <dxi-item dataField="caliber.id" >
                     <dxo-lookup [dataSource]="calibers" valueExpr="id" displayExpr="nameCaliber">

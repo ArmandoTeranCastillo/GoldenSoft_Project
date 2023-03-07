@@ -17,7 +17,7 @@
     <dxi-column dataField="numberIssues" caption="No.Baja" fixed="true"></dxi-column>
     <dxi-column dataField="dateIssue" caption="Fecha de Baja" fixed="true"  dataType="date"></dxi-column>
     <dxi-column dataField="inventoryId" caption="Registro" fixed="true">
-        <dxo-lookup [dataSource]="inventory" valueExpr="id" displayExpr="id"></dxo-lookup>
+        <dxo-lookup [dataSource]="inventory" valueExpr="inventoryId" displayExpr="inventoryId"></dxo-lookup>
     </dxi-column>
     <dxi-column dataField="reasonIssues.id" caption="Razon de Baja" fixed="true">
         <dxo-lookup [dataSource]="inventoryreasonissues" valueExpr="id" displayExpr="reasons"></dxo-lookup>

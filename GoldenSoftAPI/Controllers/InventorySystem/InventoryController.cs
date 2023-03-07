@@ -18,9 +18,9 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
 
         //Obtener todos los registros
         [HttpGet]
-        public async Task<ActionResult<List<Inventory>>> GetAll()
+        public async Task<ActionResult<List<ViewStock>>> GetAll()
         {
-            var inventory = await _context.inventory
+            var inventory = await _context.vwInventoryStock
                 .Include(i => i.caliber)
                 .Include(i => i.variety)
                 .Include(i => i.quality)
@@ -29,18 +29,16 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
                 .Include(i => i.purchaseOrder)
                 .ToListAsync();
 
-            var issues = await _context.inventoryIssues.ToListAsync();
-
             // Obtener la propiedad calculada "AvailableBoxes" para cada inventario
             var inventoryDtos = inventory.Select(i => new 
             {
-                i.Id,
+                i.inventoryId,
                 i.numberBatch,
                 i.numberPallet,
                 i.date,
-                i.numberBoxes,
-                stock = i.GetStock(issues.Where(ii => ii.inventoryId == i.Id)),
-                issues = i.GetSumIssues(issues.Where(ii => ii.inventoryId == i.Id)),
+                i.noBoxes,
+                i.noIssues,
+                i.stock,
                 i.barcode,
                 i.caliber,
                 i.variety,
