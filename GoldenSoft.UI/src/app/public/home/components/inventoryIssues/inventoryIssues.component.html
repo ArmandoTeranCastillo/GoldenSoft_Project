@@ -15,7 +15,7 @@
     (onRowRemoved)="deleteInventoryIssues($event)"
     >
     <dxi-column dataField="numberIssues" caption="No.Baja" fixed="true"></dxi-column>
-    <dxi-column dataField="dateIssue" caption="Fecha de Baja" fixed="true"></dxi-column>
+    <dxi-column dataField="dateIssue" caption="Fecha de Baja" fixed="true"  dataType="date"></dxi-column>
     <dxi-column dataField="inventoryId" caption="Registro" fixed="true">
         <dxo-lookup [dataSource]="inventory" valueExpr="id" displayExpr="id"></dxo-lookup>
     </dxi-column>
@@ -24,10 +24,28 @@
     </dxi-column>
 
     <dxo-editing
-        mode="row"   
+        mode="popup"   
         [allowUpdating]="true"
         [allowAdding]="true"
         [allowDeleting]="true"
         [confirmDelete]="true">
+        <dxo-form>
+            <dxo-popup
+            title="Editar Tabla"
+            [showTitle]="true">
+            </dxo-popup>
+            <dxi-item itemType="group" colCount="2" colSpan="2" caption="Editar Baja de Inventario">
+                <dxi-item dataField="numberIssues"></dxi-item>
+                <dxi-item dataField="dateIssue"></dxi-item>
+                <dxi-item dataField="inventoryId" >
+                    <dxo-lookup [dataSource]="inventory" valueExpr="id" displayExpr="id">
+                    </dxo-lookup>
+                </dxi-item>
+                <dxi-item dataField="reasonIssues.id">
+                    <dxo-lookup [dataSource]="inventoryreasonissues" valueExpr="id" displayExpr="reasons">
+                    </dxo-lookup>
+                </dxi-item>
+            </dxi-item>
+        </dxo-form>
     </dxo-editing>
 </dx-data-grid>

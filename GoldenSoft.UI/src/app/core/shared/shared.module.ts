@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http"
 import { RouterModule } from "@angular/router";
-import { DxDrawerModule, DxFormModule, DxSelectBoxModule, DxTextBoxComponent, DxTextBoxModule, DxValidatorModule } from "devextreme-angular";
+import { DxDateBoxModule, DxDrawerModule, DxFormModule, DxSelectBoxModule, DxTextBoxComponent, DxTextBoxModule, DxValidatorModule } from "devextreme-angular";
 import { DxToolbarModule } from "devextreme-angular";
 import { DxButtonModule } from "devextreme-angular";
 import { DxListModule } from "devextreme-angular";
@@ -30,6 +30,7 @@ import { NgxPrinterModule } from "ngx-printer";
         DxSelectBoxModule,
         DxValidatorModule,
         DxTextBoxModule,
+        DxDateBoxModule,
         NgxPrinterModule.forRoot({printOpenWindow: false}),
     ],
     declarations: [
@@ -48,6 +49,7 @@ import { NgxPrinterModule } from "ngx-printer";
         DxTextBoxModule,
         DxValidatorModule,
         NgxPrinterModule,
+        DxDateBoxModule,
         NotFoundComponent
     ],
     providers: []

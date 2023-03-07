@@ -17,10 +17,19 @@
     <dxi-column dataField="nameQuality" caption="Nombre" fixed="true"></dxi-column>
 
     <dxo-editing
-        mode="row"   
+        mode="popup"   
         [allowUpdating]="true"
         [allowAdding]="true"
         [allowDeleting]="true"
         [confirmDelete]="true">
+        <dxo-form>
+            <dxo-popup
+            title="Editar Tabla"
+            [showTitle]="true">
+            </dxo-popup>
+            <dxi-item itemType="group" colCount="2" colSpan="2" caption="Editar Calidad">
+                <dxi-item dataField="nameQuality"></dxi-item>
+            </dxi-item>
+        </dxo-form>
     </dxo-editing>
 </dx-data-grid>

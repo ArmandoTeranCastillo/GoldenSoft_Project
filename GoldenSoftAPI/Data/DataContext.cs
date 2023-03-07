@@ -1,4 +1,5 @@
 ﻿using GoldenSoftAPI.Models.InventorySystem;
+using GoldenSoftAPI.Models.InventorySystem.Views;
 using Microsoft.EntityFrameworkCore;
 
 namespace GoldenSoftAPI.Data
@@ -29,5 +30,9 @@ namespace GoldenSoftAPI.Data
         //Salidas de Inventario
         public DbSet<InventoryIssues> inventoryIssues { get; set; }
         public DbSet<InventoryReasonIssues> inventoryReasonIssues { get; set; }
+
+        //Vistas--------------------------
+        //StockDifference
+        public DbSet<ViewStock> viewStock { get; set; }
     }
 }

@@ -19,6 +19,13 @@ export class PublicService{
         )
     }
 
+    getViewStock(): Observable<any>{
+        return this.http.get('/api/ViewStock').pipe(
+            tap(console.log),
+            catchError(this.handleError)
+        )
+    }
+
     getClients(): Observable<any>{
         return this.http.get('/api/Client').pipe(
             tap(console.log),
@@ -278,6 +285,8 @@ export class PublicService{
             catchError(this.handleError)
         )
     }
+
+    
 
     private handleError(error: Response){
         console.log(error);

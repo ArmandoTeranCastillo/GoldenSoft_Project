@@ -16,13 +16,23 @@
     >
     <dxi-column dataField="id" caption="ID" fixed="true" [allowEditing]="false"></dxi-column>
     <dxi-column dataField="producer" caption="Productor" fixed="true"></dxi-column>
-    <dxi-column dataField="dateOrder" caption="Fecha de Compra" fixed="true"></dxi-column>
+    <dxi-column dataField="dateOrder" caption="Fecha de Compra" fixed="true"  dataType="date"></dxi-column>
 
     <dxo-editing
-        mode="row"   
+        mode="popup"   
         [allowUpdating]="true"
         [allowAdding]="true"
         [allowDeleting]="true"
         [confirmDelete]="true">
+        <dxo-form>
+            <dxo-popup
+            title="Editar Tabla"
+            [showTitle]="true">
+            </dxo-popup>
+            <dxi-item itemType="group" colCount="2" colSpan="2" caption="Editar Razon">
+                <dxi-item dataField="producer"></dxi-item>
+                <dxi-item dataField="dateOrder"></dxi-item>
+            </dxi-item>
+        </dxo-form>
     </dxo-editing>
 </dx-data-grid>

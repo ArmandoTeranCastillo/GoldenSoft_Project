@@ -1,5 +1,6 @@
 ﻿using GoldenSoftAPI.DataTransfer.InventorySystem.Inventory;
 using GoldenSoftAPI.Models.InventorySystem;
+using GoldenSoftAPI.Models.InventorySystem.Views;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,12 +25,35 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
                 .Include(i => i.variety)
                 .Include(i => i.quality)
                 .Include(i => i.typeBox)
-                .Include(i => i.purchaseOrder)
                 .Include(i => i.client)
+                .Include(i => i.purchaseOrder)
                 .ToListAsync();
 
-            return Ok(inventory);
-        }
+            var issues = await _context.inventoryIssues.ToListAsync();
+
+            // Obtener la propiedad calculada "AvailableBoxes" para cada inventario
+            var inventoryDtos = inventory.Select(i => new 
+            {
+                i.Id,
+                i.numberBatch,
+                i.numberPallet,
+                i.date,
+                i.numberBoxes,
+                stock = i.GetStock(issues.Where(ii => ii.inventoryId == i.Id)),
+                issues = i.GetSumIssues(issues.Where(ii => ii.inventoryId == i.Id)),
+                i.barcode,
+                i.caliber,
+                i.variety,
+                i.quality,
+                i.typeBox,
+                i.client,
+                i.purchaseOrder
+            }).ToList();
+
+            return Ok(inventoryDtos);
+        }   
+            
+        
 
 
         //Obtener un solo registro
@@ -38,9 +62,24 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
         {
             var inventories = await _context.inventory
                 .Where(i => i.Id == id)
+                .Select(i => new
+                {
+                    i.Id,
+                    i.numberBatch,
+                    i.numberPallet,
+                    i.date,
+                    i.numberBoxes,
+                    i.barcode,
+                    i.caliber,
+                    i.variety,
+                    i.quality,
+                    i.typeBox,
+                    i.purchaseOrder,
+                    i.client
+                })
                 .ToListAsync();
 
-            return inventories;
+            return Ok(inventories);
         }
 
         //Ingresar entrada de inventario

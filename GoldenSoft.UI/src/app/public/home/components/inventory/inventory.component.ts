@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { PublicService } from "src/app/public/public.service";
+import {combineLatest, concat, forkJoin, map, merge, of, tap} from "rxjs"
+
 
 @Component({
     selector: 'app-inventory',
@@ -15,7 +17,18 @@ export class InventoryComponent implements OnInit {
     client;
     purchaseorder;
 
-    constructor(private publicService: PublicService) {}
+    viewstock: any[] | undefined;
+
+    titleBoxes = {
+        text: 'No.Cajas(Entrada)',
+    };
+    titleIssues = {
+        text: 'No.Cajas(Salida)',
+    };
+
+    constructor(private publicService: PublicService) {
+        
+    }
 
     ngOnInit(): void {
         this.getInventory();
@@ -25,6 +38,7 @@ export class InventoryComponent implements OnInit {
         this.getTypeBox();
         this.getClient();
         this.getPurchaseOrder();
+      
     }
 
     getInventory(){
@@ -33,8 +47,17 @@ export class InventoryComponent implements OnInit {
         this.publicService.getInventory().subscribe(
         response => this.inventory = response,
         error => console.log(error)
-        )  
+        ) 
      }
+
+   prepareForm(e: any){
+    e.form.option('inventory').stock = e.row.data.stock;
+   }
+
+   getStockColumn(rowData){
+      return rowData.stock;
+    }
+    
 
     getCalibers(){
         this.publicService.getCalibers().subscribe(
@@ -111,12 +134,14 @@ export class InventoryComponent implements OnInit {
       this.publicService.createInventory(dataToSend).subscribe(
         response => {
             console.log(response);
+            this.getInventory();
+            e.component.refresh();
         }
       )
-      e.component.refresh();
+      
     }
 
-    updateInventory(e){
+    async updateInventory(e){
         const {
             id,
             numberPallet,
@@ -147,12 +172,17 @@ export class InventoryComponent implements OnInit {
             clientId,
             purchaseorderId
           };
-
-        this.publicService.updateInventory(dataToSend).subscribe(
+        
+        await this.publicService.updateInventory(dataToSend).subscribe(
             response => {
                 console.log(response);
+                this.getInventory();
+                e.component.refresh();
             }
         )
+        
+       
+        
     }
 
     deleteInventory(e){

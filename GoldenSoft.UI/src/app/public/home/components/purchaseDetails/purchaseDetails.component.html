@@ -20,10 +20,23 @@
     </dxi-column>
 
     <dxo-editing
-        mode="row"   
+        mode="popup"   
         [allowUpdating]="true"
         [allowAdding]="true"
         [allowDeleting]="true"
         [confirmDelete]="true">
+        <dxo-form>
+            <dxo-popup
+            title="Editar Tabla"
+            [showTitle]="true">
+            </dxo-popup>
+            <dxi-item itemType="group" colCount="2" colSpan="2" caption="Editar Detalles de Compra">
+                <dxi-item dataField="details"></dxi-item>
+                <dxi-item dataField="purchaseOrderId">
+                    <dxo-lookup [dataSource]="purchaseorder" valueExpr="id" displayExpr="id">
+                    </dxo-lookup>
+                </dxi-item>
+            </dxi-item>
+        </dxo-form>
     </dxo-editing>
 </dx-data-grid>

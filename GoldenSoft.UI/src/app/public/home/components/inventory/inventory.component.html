@@ -17,8 +17,10 @@
     <dxi-column dataField="id" caption="Registro" fixed="true" [allowEditing]="false" ></dxi-column>
     <dxi-column dataField="numberPallet" caption="Tarima" fixed="true" ></dxi-column>
     <dxi-column dataField="numberBatch" caption="No.Lote" fixed="true"></dxi-column>
-    <dxi-column dataField="date" caption="Fecha" fixed="true"></dxi-column>
-    <dxi-column dataField="numberBoxes" caption="No.Caja" fixed="true"></dxi-column>
+    <dxi-column dataField="date" caption="Fecha" fixed="true" dataType="date"></dxi-column>
+    <dxi-column dataField="numberBoxes" caption="No.Cajas(Stock)" fixed="true" [calculateDisplayValue]="getStockColumn"></dxi-column>
+    <dxi-column dataField="issues" [visible]="false"></dxi-column>
+    <dxi-column dataField="stock" [visible]="false"></dxi-column>
     <dxi-column dataField="barcode" caption="Código" fixed="true"></dxi-column>
     <dxi-column dataField="caliber.id" caption="Calibre" fixed="true">
         <dxo-lookup [dataSource]="calibers" valueExpr="id" displayExpr="nameCaliber"></dxo-lookup>
@@ -40,11 +42,52 @@
     </dxi-column>
 
     <dxo-editing
-        mode="row"   
+        mode="popup"   
         [allowUpdating]="true"
         [allowAdding]="true"
         [allowDeleting]="true"
         [confirmDelete]="true">
+        <dxo-form [formData]="inventory">
+            <dxo-popup
+            title="Editar"
+            [showTitle]="true"
+            >
+            </dxo-popup>
+            <dxi-item itemType="group" colCount="2" colSpan="2" caption="Editar Inventario">
+                <dxi-item dataField="numberPallet" ></dxi-item>
+                <dxi-item dataField="numberBatch" ></dxi-item>
+                <dxi-item dataField="date"></dxi-item>
+                <dxi-item dataField="numberBoxes" [label]="titleBoxes"></dxi-item>
+                <dxi-item dataField="issues" [label]="titleIssues" [disabled]="true"></dxi-item>
+                <dxi-item dataField="barcode"></dxi-item>
+                <dxi-item dataField="caliber.id" >
+                    <dxo-lookup [dataSource]="calibers" valueExpr="id" displayExpr="nameCaliber">
+                    </dxo-lookup>
+                </dxi-item>
+                <dxi-item dataField="variety.id" >
+                    <dxo-lookup [dataSource]="variety" valueExpr="id" displayExpr="nameVariety">
+                    </dxo-lookup>
+                </dxi-item>
+                <dxi-item dataField="quality.id" >
+                    <dxo-lookup [dataSource]="quality" valueExpr="id" displayExpr="nameQuality">
+                    </dxo-lookup>
+                </dxi-item>
+                <dxi-item dataField="typeBox.id">
+                    <dxo-lookup [dataSource]="typebox" valueExpr="id" displayExpr="nameTypeBox">
+                    </dxo-lookup>
+                </dxi-item>
+                <dxi-item dataField="client.id" >
+                    <dxo-lookup [dataSource]="client" valueExpr="id" displayExpr="name">
+                    </dxo-lookup>
+                </dxi-item>
+                <dxi-item dataField="purchaseOrder.id">
+                    <dxo-lookup [dataSource]="purchaseorder" valueExpr="id" displayExpr="name">
+                    </dxo-lookup>
+                </dxi-item>
+            </dxi-item>
+        </dxo-form>
+
     </dxo-editing>
 
 </dx-data-grid>
+
