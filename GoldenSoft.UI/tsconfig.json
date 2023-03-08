@@ -23,7 +23,14 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "paths": {
+      "exceljs":[
+        "node_modules/exceljs/dist/exceljs.min.js"
+      ]
+    },
+    "types": ["node"]
+
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

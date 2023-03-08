@@ -2,18 +2,25 @@
     <h3>Tabla de Inventario</h3>
 </div>
 
+<div #gridContainer style="height: 500px;">
 <dx-data-grid 
-    id="dataGrid"
+    #dataGrid
     [dataSource]="inventory"
     keyExpr="inventoryId"
     [allowColumnReordering]="false"
     [allowColumnResizing]="true"
     [columnAutoWidth]="true"
     [showRowLines]= "true"
+    (onExporting)="exportData($event)"
     (onRowInserted)="createInventory($event)"
     (onRowUpdated)="updateInventory($event)"
     (onRowRemoved)="deleteInventory($event)"
     >
+    <dxo-export
+    [enabled]="true"
+    [formats]="['xlsx', 'pdf']">
+    </dxo-export>
+    <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
     <dxi-column dataField="inventoryId" caption="Registro" fixed="true" [allowEditing]="false" ></dxi-column>
     <dxi-column dataField="numberPallet" caption="Tarima" fixed="true" ></dxi-column>
     <dxi-column dataField="numberBatch" caption="No.Lote" fixed="true"></dxi-column>
@@ -31,13 +38,13 @@
     <dxi-column dataField="quality.id" caption="Calidad" fixed="true">
         <dxo-lookup [dataSource]="quality" valueExpr="id" displayExpr="nameQuality"></dxo-lookup>
     </dxi-column>
-    <dxi-column dataField="typeBox.id" caption="Tipo de Caja" fixed="true">
+    <dxi-column dataField="typeBox.id" caption="Tipo" fixed="true">
         <dxo-lookup [dataSource]="typebox" valueExpr="id" displayExpr="nameTypeBox"></dxo-lookup>
     </dxi-column>
     <dxi-column dataField="client.id" caption="Cliente" fixed="true">
         <dxo-lookup [dataSource]="client" valueExpr="id" displayExpr="name"></dxo-lookup>
     </dxi-column>
-    <dxi-column dataField="purchaseOrder.id" caption="Órden de Compra" fixed="true">
+    <dxi-column dataField="purchaseOrder.id" caption="Compra" fixed="true">
         <dxo-lookup [dataSource]="purchaseorder" valueExpr="id" displayExpr="id"></dxo-lookup>
     </dxi-column>
 
@@ -90,4 +97,5 @@
     </dxo-editing>
 
 </dx-data-grid>
+</div>
 
