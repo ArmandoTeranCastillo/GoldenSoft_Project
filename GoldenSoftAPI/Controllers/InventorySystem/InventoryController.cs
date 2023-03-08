@@ -26,7 +26,6 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
                 .Include(i => i.quality)
                 .Include(i => i.typeBox)
                 .Include(i => i.client)
-                .Include(i => i.purchaseOrder)
                 .ToListAsync();
 
             // Obtener la propiedad calculada "AvailableBoxes" para cada inventario
@@ -45,7 +44,6 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
                 i.quality,
                 i.typeBox,
                 i.client,
-                i.purchaseOrder
             }).ToList();
 
             return Ok(inventoryDtos);
@@ -72,7 +70,6 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
                     i.variety,
                     i.quality,
                     i.typeBox,
-                    i.purchaseOrder,
                     i.client
                 })
                 .ToListAsync();
@@ -114,12 +111,6 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
             {
                 return NotFound("Este cliente no existe");
             }
-            //Revisar si existe orden de compra
-            var purchaseorder = await _context.purchases.FindAsync(request.purchaseOrderId);
-            if (purchaseorder == null)
-            {
-                return NotFound("Esta orden de compra no existe");
-            }
 
             var newInventory = new Inventory
             {
@@ -133,7 +124,6 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
                 quality = quality,
                 typeBox = typebox,
                 client = client,
-                purchaseOrder = purchaseorder
             };
 
             _context.inventory.Add(newInventory);
@@ -184,12 +174,7 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
             {
                 return NotFound("Este cliente no existe");
             }
-            //Revisar si existe orden de compra
-            var purchaseorder = await _context.purchases.FindAsync(request.purchaseOrderId);
-            if (purchaseorder == null)
-            {
-                return NotFound("Esta orden de compra no existe");
-            }
+            
 
             dbInventory.numberPallet = request.numberPallet;
             dbInventory.numberBatch = request.numberBatch;
@@ -201,7 +186,6 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
             dbInventory.variety = variety;
             dbInventory.typeBox = typebox;
             dbInventory.client = client;
-            dbInventory.purchaseOrder = purchaseorder;
 
             await _context.SaveChangesAsync();
 

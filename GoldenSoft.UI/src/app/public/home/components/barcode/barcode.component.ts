@@ -70,6 +70,11 @@ export class BarcodeComponent implements OnInit {
             
     }
 
+    readBarcode(e){
+        setTimeout(() => {
+            console.log(e.target.value)
+          }, 1000);
+    }
 
     ngOnInit(): void {
         this.getCaliber();
@@ -78,8 +83,7 @@ export class BarcodeComponent implements OnInit {
         this.getTypeBox();
     }
 
-
-
+    
     changeBatch(e: any){
         if (e.value === "" || e.value === null){
             this.batchvalue = false
@@ -110,11 +114,11 @@ export class BarcodeComponent implements OnInit {
     }
 
     getBarcode(){
-        this.batchfield = this.dxbatch.instance.option('value');
-        this.palletfield = this.dxpallet.instance.option('value');
-        this.caliberfield = this.dxcaliber.value.id;
-        this.varietyfield = this.dxvariety.value.id;
-        this.qualityfield = this.dxquality.value.id;
+        this.batchfield = this.dxbatch.instance.option('value') + "A";
+        this.palletfield = this.dxpallet.instance.option('value') + "A";
+        this.caliberfield = this.dxcaliber.value.id + "A";
+        this.varietyfield = this.dxvariety.value.id + "A";
+        this.qualityfield = this.dxquality.value.id + "A";
         this.typeboxfield = this.dxtypebox.value.id;
         
         this.data = this.batchfield + 

@@ -13,7 +13,8 @@
         [formData]="box"
         colCount="2">
     <dxi-item id='lote' dataField="lote">
-        <dx-text-box #dxbatch (onValueChanged)="changeBatch($event)"  required maxLength="3">
+        <dx-text-box #dxbatch (onValueChanged)="changeBatch($event)"  
+        required maxLength="3">
         </dx-text-box>
     </dxi-item>
     <dxi-item id='tarima' dataField="tarima">
@@ -87,6 +88,7 @@
         style="width: 200;">
         Imprimir
 </button>
+
 
 </div>
 

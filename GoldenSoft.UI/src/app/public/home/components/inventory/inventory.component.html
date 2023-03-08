@@ -44,9 +44,6 @@
     <dxi-column dataField="client.id" caption="Cliente" fixed="true">
         <dxo-lookup [dataSource]="client" valueExpr="id" displayExpr="name"></dxo-lookup>
     </dxi-column>
-    <dxi-column dataField="purchaseOrder.id" caption="Compra" fixed="true">
-        <dxo-lookup [dataSource]="purchaseorder" valueExpr="id" displayExpr="id"></dxo-lookup>
-    </dxi-column>
 
     <dxo-editing
         mode="popup"   
@@ -85,10 +82,6 @@
                 </dxi-item>
                 <dxi-item dataField="client.id" >
                     <dxo-lookup [dataSource]="client" valueExpr="id" displayExpr="name">
-                    </dxo-lookup>
-                </dxi-item>
-                <dxi-item dataField="purchaseOrder.id">
-                    <dxo-lookup [dataSource]="purchaseorder" valueExpr="id" displayExpr="name">
                     </dxo-lookup>
                 </dxi-item>
             </dxi-item>

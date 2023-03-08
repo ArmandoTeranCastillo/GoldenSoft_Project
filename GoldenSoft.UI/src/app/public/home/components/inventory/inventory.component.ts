@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, HostListener, OnInit } from "@angular/core";
 import { PublicService } from "src/app/public/public.service";
 import {combineLatest, concat, forkJoin, map, merge, of, tap} from "rxjs"
 import { Workbook } from 'exceljs';
@@ -22,6 +22,9 @@ export class InventoryComponent implements OnInit {
     client;
     purchaseorder;
 
+    interval;
+    scannerEnabled = true;
+    barcodeString = "";
     viewstock: any[] | undefined;
 
     titleBoxes = {
@@ -44,6 +47,29 @@ export class InventoryComponent implements OnInit {
         this.getClient();
         this.getPurchaseOrder();
       
+    }
+
+    @HostListener('document:keydown', ['$event'])
+    onBarcodeScanned(event: KeyboardEvent) {
+        if(this.interval){
+            clearInterval(this.interval);
+        }
+        if(event.code === "Enter"){
+            if(this.barcodeString){
+                this.handleBarcode(this.barcodeString);
+            this.barcodeString = "";
+            return;
+            }
+        }
+        if(event.key !== "Shift"){
+            this.barcodeString += event.key;
+        }
+        this.interval = setInterval(() => this.barcodeString = "", 20);
+    }    
+    
+
+    handleBarcode(barcode){
+        console.log(barcode);
     }
 
     exportData(e){
@@ -145,7 +171,6 @@ export class InventoryComponent implements OnInit {
       const qualityId = e.data.quality.id;
       const typeboxId = e.data.typeBox.id;
       const clientId = e.data.client.id;
-      const purchaseorderId = e.data.purchaseOrder.id;
 
       const dataToSend = {
         numberPallet,
@@ -158,7 +183,6 @@ export class InventoryComponent implements OnInit {
         qualityId,
         typeboxId,
         clientId,
-        purchaseorderId
       };
 
       this.publicService.createInventory(dataToSend).subscribe(
@@ -186,7 +210,6 @@ export class InventoryComponent implements OnInit {
           const qualityId = e.data.quality.id;
           const typeboxId = e.data.typeBox.id;
           const clientId = e.data.client.id;
-          const purchaseorderId = e.data.purchaseOrder.id;
     
           const dataToSend = {
             id,
@@ -200,7 +223,6 @@ export class InventoryComponent implements OnInit {
             qualityId,
             typeboxId,
             clientId,
-            purchaseorderId
           };
         
         await this.publicService.updateInventory(dataToSend).subscribe(

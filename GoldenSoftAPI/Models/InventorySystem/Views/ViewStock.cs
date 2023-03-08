@@ -29,6 +29,5 @@ namespace GoldenSoftAPI.Models.InventorySystem.Views
 
         public Client client { get; set; } //One To Many
 
-        public PurchaseOrder purchaseOrder { get; set; } //One To Many 
     }
 }
