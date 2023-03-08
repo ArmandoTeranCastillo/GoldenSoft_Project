@@ -20,6 +20,7 @@ export class BarcodeComponent implements OnInit {
     variety;
     quality;
     typebox;
+    client;
     sanitizerBarcode;
 
     data;
@@ -29,6 +30,7 @@ export class BarcodeComponent implements OnInit {
     varietyfield;
     qualityfield;
     typeboxfield;
+    clientfield;
 
     batchvalue;
     palletvalue;
@@ -36,6 +38,7 @@ export class BarcodeComponent implements OnInit {
     varietyvalue;
     qualityvalue;
     typeboxvalue;
+    clientvalue;
 
     generateValue;
 
@@ -57,7 +60,7 @@ export class BarcodeComponent implements OnInit {
     @ViewChild('dxvariety') dxvariety!: DxSelectBoxComponent;
     @ViewChild('dxquality') dxquality!: DxSelectBoxComponent;
     @ViewChild('dxtypebox') dxtypebox!: DxSelectBoxComponent;
-
+    @ViewChild('dxclient') dxclient!: DxSelectBoxComponent;
     @ViewChild('barcode') bcode!: ElementRef;
 
     printImage(){
@@ -81,6 +84,7 @@ export class BarcodeComponent implements OnInit {
         this.getVariety();
         this.getQuality();
         this.getTypeBox();
+        this.getClient();
     }
 
     
@@ -112,6 +116,9 @@ export class BarcodeComponent implements OnInit {
     changeTypeBox(){
             this.typeboxvalue = true;
     }
+    changeClient(){
+        this.clientvalue = true;
+}
 
     getBarcode(){
         this.batchfield = this.dxbatch.instance.option('value') + "A";
@@ -119,14 +126,16 @@ export class BarcodeComponent implements OnInit {
         this.caliberfield = this.dxcaliber.value.id + "A";
         this.varietyfield = this.dxvariety.value.id + "A";
         this.qualityfield = this.dxquality.value.id + "A";
-        this.typeboxfield = this.dxtypebox.value.id;
+        this.typeboxfield = this.dxtypebox.value.id + "A";
+        this.clientfield = this.dxclient.value.id;
         
         this.data = this.batchfield + 
                     this.palletfield + 
                     this.caliberfield + 
                     this.varietyfield +
                     this.qualityfield +
-                    this.typeboxfield
+                    this.typeboxfield +
+                    this.clientfield
 
         console.log(this.data)
         this.publicService.getBarcode(this.data).subscribe(
@@ -160,6 +169,13 @@ export class BarcodeComponent implements OnInit {
     getTypeBox(){
         this.publicService.getTypeBox().subscribe(
             response => this.typebox = response,
+            error => console.log(error)
+            )
+    }
+
+    getClient(){
+        this.publicService.getClients().subscribe(
+            response => this.client = response,
             error => console.log(error)
             )
     }

@@ -3,6 +3,7 @@ using GoldenSoftAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoldenSoftAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230308222208_RemoveOrder")]
+    partial class RemoveOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -191,16 +194,11 @@ namespace GoldenSoftAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("inventoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("producer")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("inventoryId");
 
                     b.ToTable("purchases");
                 });
@@ -383,17 +381,6 @@ namespace GoldenSoftAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("purchaseOrder");
-                });
-
-            modelBuilder.Entity("GoldenSoftAPI.Models.InventorySystem.PurchaseOrder", b =>
-                {
-                    b.HasOne("GoldenSoftAPI.Models.InventorySystem.Inventory", "inventory")
-                        .WithMany()
-                        .HasForeignKey("inventoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("inventory");
                 });
 
             modelBuilder.Entity("GoldenSoftAPI.Models.InventorySystem.Views.ViewStock", b =>

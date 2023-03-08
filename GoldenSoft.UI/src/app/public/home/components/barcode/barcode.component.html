@@ -25,7 +25,7 @@
     <dxi-item>
         <dx-select-box
             #dxcaliber
-            label="Caliber"
+            label="Calibre"
             displayExpr="nameCaliber"
             (onValueChanged)="changeCaliber()"
             [dataSource]="caliber">
@@ -54,7 +54,6 @@
             <dxi-validation-rule type="required" message="El campo es obligatorio"></dxi-validation-rule>
     </dx-select-box>
     </dxi-item>
-
     <dxi-item>
         <dx-select-box
             #dxtypebox
@@ -62,6 +61,16 @@
             displayExpr="nameTypeBox"
             (onValueChanged)="changeTypeBox()"
             [dataSource]="typebox">
+            <dxi-validation-rule type="required" message="El campo es obligatorio"></dxi-validation-rule>
+        </dx-select-box>
+    </dxi-item>
+    <dxi-item>
+        <dx-select-box
+            #dxclient
+            label="Cliente"
+            displayExpr="name"
+            (onValueChanged)="changeClient()"
+            [dataSource]="client">
             <dxi-validation-rule type="required" message="El campo es obligatorio"></dxi-validation-rule>
         </dx-select-box>
     </dxi-item>

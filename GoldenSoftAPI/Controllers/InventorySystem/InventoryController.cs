@@ -20,7 +20,7 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
         [HttpGet]
         public async Task<ActionResult<List<ViewStock>>> GetAll()
         {
-            var inventory = await _context.vwInventoryStock
+            var inventory = await _context.vwInventoryStock2
                 .Include(i => i.caliber)
                 .Include(i => i.variety)
                 .Include(i => i.quality)

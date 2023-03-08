@@ -33,6 +33,6 @@ namespace GoldenSoftAPI.Data
 
         //Vistas--------------------------
         //StockDifference
-        public DbSet<ViewStock> vwInventoryStock { get; set; }
+        public DbSet<ViewStock> vwInventoryStock2 { get; set; }
     }
 }

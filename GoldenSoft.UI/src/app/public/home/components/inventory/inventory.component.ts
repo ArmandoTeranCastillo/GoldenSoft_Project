@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from "@angular/core";
+import { Component, HostListener, OnInit, ViewChild } from "@angular/core";
 import { PublicService } from "src/app/public/public.service";
 import {combineLatest, concat, forkJoin, map, merge, of, tap} from "rxjs"
 import { Workbook } from 'exceljs';
@@ -6,6 +6,7 @@ import saveAs from 'file-saver';
 import { exportDataGrid } from 'devextreme/excel_exporter';
 import { exportDataGrid as exportDataGridToPdf } from 'devextreme/pdf_exporter';
 import { jsPDF } from 'jspdf';
+import { DxDataGridComponent } from "devextreme-angular";
 
 
 @Component({
@@ -33,6 +34,8 @@ export class InventoryComponent implements OnInit {
     titleIssues = {
         text: 'No.Cajas(Salida)',
     };
+
+    @ViewChild('dataGrid', {static: false}) grid!: DxDataGridComponent;
 
     constructor(private publicService: PublicService) {
         
@@ -69,7 +72,49 @@ export class InventoryComponent implements OnInit {
     
 
     handleBarcode(barcode){
-        console.log(barcode);
+        const barcodeString = barcode;
+        const barcodeArray = barcode.split("A")
+        const date = new Date();
+        date.setHours(0,0,0,0);
+        // Agregar una nueva fila al grid
+        this.createInventoryFromBarcode(
+            parseInt(barcodeArray[0]), 
+            parseInt(barcodeArray[1]), 
+            1, 
+            date.toISOString().substring(0, 10), 
+            barcodeString,
+            parseInt(barcodeArray[2]),
+            parseInt(barcodeArray[3]),
+            parseInt(barcodeArray[4]),
+            parseInt(barcodeArray[5]),
+            parseInt(barcodeArray[6]) 
+        );
+         
+        this.grid.instance.refresh();
+        console.log(barcodeArray);
+    }
+
+    createInventoryFromBarcode(noBatch, noPallet, noBoxes, date, barcode, caliber, variety, quality, typebox, client){
+        const dataToSend = {
+            noBatch,
+            noPallet,
+            date,
+            noBoxes,
+            barcode,
+            caliber,
+            variety,
+            quality,
+            typebox,
+            client,
+          };
+          console.log(dataToSend);
+          this.publicService.createInventory(dataToSend).subscribe(
+            response => {
+                console.log(response);
+                this.getInventory();
+                this.grid.instance.refresh();
+            }
+          )
     }
 
     exportData(e){
@@ -238,7 +283,7 @@ export class InventoryComponent implements OnInit {
     }
 
     deleteInventory(e){
-        this.publicService.deleteInventory(e.data.id).subscribe(
+        this.publicService.deleteInventory(e.data.inventoryId).subscribe(
             response => {
                 console.log(response)
             }

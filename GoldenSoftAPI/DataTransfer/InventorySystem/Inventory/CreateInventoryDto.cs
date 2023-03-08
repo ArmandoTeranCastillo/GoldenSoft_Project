@@ -22,6 +22,5 @@
 
         public int clientId { get; set; } = 1; //One To Many
 
-        public int purchaseOrderId { get; set; } = 1; //One To Many
     }
 }

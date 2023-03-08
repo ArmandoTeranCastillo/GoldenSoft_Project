@@ -13,7 +13,7 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
         public IActionResult GenerateBarcode(string code)
         {
             Barcode barcode = new Barcode();
-            Image img = barcode.Encode(TYPE.CODE128, code, Color.Black, Color.White, 250, 100);
+            Image img = barcode.Encode(TYPE.CODE128, code, Color.Black, Color.White, 2500, 1000);
             var data = ConvertImageToBites(img);
             return File(data, "image/jpeg");
         }
