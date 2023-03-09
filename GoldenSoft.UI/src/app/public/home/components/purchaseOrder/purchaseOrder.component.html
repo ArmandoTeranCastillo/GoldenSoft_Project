@@ -16,8 +16,10 @@
     >
     <dxi-column dataField="id" caption="ID" fixed="true" [allowEditing]="false"></dxi-column>
     <dxi-column dataField="producer" caption="Productor" fixed="true"></dxi-column>
-    <dxi-column dataField="dateOrder" caption="Fecha de Compra" fixed="true"  dataType="date"></dxi-column>
-
+    <dxi-column dataField="dateOrder" caption="Fecha de Compra" fixed="true" format='dd/MM/yyyy' dataType="date"></dxi-column>
+    <dxi-column dataField="inventoryId" caption="Registro" fixed="true">
+        <dxo-lookup [dataSource]="inventory" valueExpr="inventoryId" displayExpr="inventoryId"></dxo-lookup>
+    </dxi-column>
     <dxo-editing
         mode="popup"   
         [allowUpdating]="true"
@@ -32,6 +34,9 @@
             <dxi-item itemType="group" colCount="2" colSpan="2" caption="Editar Razon">
                 <dxi-item dataField="producer"></dxi-item>
                 <dxi-item dataField="dateOrder"></dxi-item>
+            </dxi-item>
+            <dxi-item dataField="inventoryId" caption="Registro" fixed="true">
+                <dxo-lookup [dataSource]="inventory" valueExpr="inventoryId" displayExpr="inventoryId"></dxo-lookup>
             </dxi-item>
         </dxo-form>
     </dxo-editing>

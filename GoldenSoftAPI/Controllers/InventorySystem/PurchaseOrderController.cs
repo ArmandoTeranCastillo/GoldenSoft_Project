@@ -43,6 +43,7 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
             {
                 producer = request.producer,
                 dateOrder = request.dateOrder,
+                inventoryId = request.inventoryId
             };
 
             _context.purchases.Add(newPurchaseOrder);
@@ -62,6 +63,7 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
 
             dbPurchaseOrder.producer = request.producer;
             dbPurchaseOrder.dateOrder = request.dateOrder;
+            dbPurchaseOrder.inventoryId = request.inventoryId;
 
             await _context.SaveChangesAsync();
 

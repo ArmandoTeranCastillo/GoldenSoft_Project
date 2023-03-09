@@ -8,11 +8,21 @@ import { PublicService } from "src/app/public/public.service";
 })
 export class PurchaseOrderComponent implements OnInit {
     purchaseorder;
+    inventory;
 
+    
     constructor(private publicService: PublicService) {}
 
     ngOnInit(): void {
         this.getPurchaseOrder();
+        this.getInventory();
+    }
+
+    getInventory(){
+        this.publicService.getInventory().subscribe(
+            response => this.inventory = response,
+            error => console.log(error)
+            ) 
     }
 
     getPurchaseOrder(){
@@ -23,18 +33,33 @@ export class PurchaseOrderComponent implements OnInit {
     }
 
     createPurchaseOrder(e){
-        this.publicService.createPurchaseOrder(e.data).subscribe(
+        const producer = e.data.producer;
+        const dateOrder = e.data.dateOrder;
+        const inventoryId = e.data.inventoryId;
+
+        const dataToSend = {
+            producer,
+            dateOrder,
+            inventoryId
+        }
+
+        console.log(dataToSend)
+
+        this.publicService.createPurchaseOrder(dataToSend).subscribe(
             response => {
                 console.log(response);
+                this.getPurchaseOrder();
+                e.component.refresh();
             }
           )
-        e.component.refresh();
+      
     }
 
     updatePurchaseOrder(e){
         this.publicService.updatePurchaseOrder(e.data).subscribe(
             response => {
                 console.log(response);
+                e.component.refresh();
             }
         )
     }

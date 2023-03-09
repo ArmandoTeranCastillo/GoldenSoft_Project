@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace GoldenSoftAPI.Models.InventorySystem.Views
 {
     [Keyless]
-    [NotMapped]
+ 
     public class ViewStock
     {
         

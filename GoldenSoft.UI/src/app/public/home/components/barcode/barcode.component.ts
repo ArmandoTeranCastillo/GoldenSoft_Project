@@ -75,7 +75,6 @@ export class BarcodeComponent implements OnInit {
 
     readBarcode(e){
         setTimeout(() => {
-            console.log(e.target.value)
           }, 1000);
     }
 
@@ -93,7 +92,6 @@ export class BarcodeComponent implements OnInit {
             this.batchvalue = false
         } else {
             this.batchvalue = true;
-            console.log(this.batchvalue)
         } 
     }
     changePallet(e: any){
@@ -101,7 +99,6 @@ export class BarcodeComponent implements OnInit {
             this.palletvalue = false
         } else {
             this.palletvalue = true;
-            console.log(this.palletvalue)
         } 
     }
     changeCaliber(){
@@ -179,8 +176,5 @@ export class BarcodeComponent implements OnInit {
             error => console.log(error)
             )
     }
-
-
-
 }
 

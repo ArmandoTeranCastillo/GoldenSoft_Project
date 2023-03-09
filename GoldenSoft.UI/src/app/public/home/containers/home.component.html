@@ -11,8 +11,9 @@
     [height]="900"
     [minSize]="37"
     revealMode="expand"
-    openedStateMode="overlap"
+    openedStateMode="shrink"
     [(opened)]="isDrawerOpen"
+    [closeOnOutsideClick]="true"
     style="background-color: antiquewhite;">
     <div *dxTemplate="let data of 'template'">
         <dx-list 
