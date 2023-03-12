@@ -12,7 +12,14 @@ export class QualityComponent implements OnInit {
     constructor(private publicService: PublicService) {}
 
     ngOnInit(): void {
-        this.getQuality();
+        this.fetchQuality();
+    }
+
+    fetchQuality(){
+        this.publicService.fetchQuality().subscribe(
+            response => this.quality = response,
+            error => console.log(error)
+        )
     }
 
     getQuality(){

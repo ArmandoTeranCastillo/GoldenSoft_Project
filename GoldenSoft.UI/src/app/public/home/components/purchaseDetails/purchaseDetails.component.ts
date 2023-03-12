@@ -19,7 +19,19 @@ export class PurchaseDetailsComponent implements OnInit {
        
     }
 
-    
+    fetchPurchaseDetails(){
+        this.publicService.fetchPurchaseDetails().subscribe(
+            response => this.purchasedetails = response,
+            error => console.log(error)
+        )
+    }
+
+    fetchPurchaseOrder(){
+        this.publicService.fetchPurchaseOrder().subscribe(
+            response => this.purchaseorder = response,
+            error => console.log(error)
+        )
+    }
 
     getPurchaseDetails(){
         this.publicService.getPurchaseDetails().subscribe(

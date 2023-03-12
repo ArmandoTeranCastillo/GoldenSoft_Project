@@ -25,18 +25,20 @@ export class HomeComponent implements OnInit {
         {id: 11, text: "Generador de Código de Barras", icon: "tips", path: "home/barcode"}
     ]
 
-    isDrawerOpen: boolean = true;
-    buttonOptions: any = {
-        icon: "menu",
-        onClick: () => {
-            this.isDrawerOpen = !this.isDrawerOpen
-        }
-    }
+    
     
     constructor(private router : Router) { }
 
     ngOnInit() {
         this.router.navigate(['/home', 'inventory'])
+     }
+
+     isDrawerOpen: boolean = false;
+     buttonOptions: any = {
+         icon: "menu",
+         onClick: () => {
+             this.isDrawerOpen = !this.isDrawerOpen
+         }
      }
 
      

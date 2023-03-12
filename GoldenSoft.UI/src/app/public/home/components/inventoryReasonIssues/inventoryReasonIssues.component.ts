@@ -13,7 +13,14 @@ export class InventoryReasonIssuesComponent implements OnInit {
     constructor(private publicService: PublicService) {}
 
     ngOnInit(): void {
-        this.getInventoryReasonIssues();
+        this.fetchInventoryReasonIssues();
+    }
+
+    fetchInventoryReasonIssues(){
+        this.publicService.fetchInventoryReasonIssues().subscribe(
+            response => this.inventoryreasonissues = response,
+            error => console.log(error)
+        )
     }
 
     getInventoryReasonIssues(){

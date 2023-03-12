@@ -12,7 +12,14 @@ export class TypeBoxComponent implements OnInit {
     constructor(private publicService: PublicService) {}
 
     ngOnInit(): void {
-        this.getTypeBox();
+        this.fetchTypeBox();
+    }
+
+    fetchTypeBox(){
+        this.publicService.fetchTypeBox().subscribe(
+            response => this.typebox = response,
+            error => console.log(error)
+        )
     }
 
     getTypeBox(){

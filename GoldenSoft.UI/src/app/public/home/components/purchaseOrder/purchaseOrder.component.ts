@@ -14,8 +14,22 @@ export class PurchaseOrderComponent implements OnInit {
     constructor(private publicService: PublicService) {}
 
     ngOnInit(): void {
-        this.getPurchaseOrder();
-        this.getInventory();
+        this.fetchPurchaseOrder();
+        this.fetchInventory();
+    }
+
+    fetchPurchaseOrder(){
+        this.publicService.fetchPurchaseOrder().subscribe(
+            response => this.purchaseorder = response,
+            error => console.log(error)
+        )
+    }
+
+    fetchInventory(){
+        this.publicService.fetchInventory().subscribe(
+            response => this.inventory = response,
+            error => console.log(error)
+        )
     }
 
     getInventory(){

@@ -1,11 +1,27 @@
-import { Injectable} from "@angular/core";
+import { Injectable, ViewChild} from "@angular/core";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
+import { Observable, of, throwError } from "rxjs";
 import {map, tap, catchError} from 'rxjs/operators';
+import { DxDataGridComponent } from "devextreme-angular";
 
 @Injectable()
 
 export class PublicService{
+    private inventory;
+    private clients;
+    private calibers;
+    private variety;
+    private quality;
+    private typeBox;
+
+    private inventoryissues;
+    private inventoryreasonissues;
+
+    private purchaseorder;
+    private purchasedetails;
+
+    
+
     constructor(private http: HttpClient){}
 
     //Lista de los observadores
@@ -16,10 +32,104 @@ export class PublicService{
         )
     }
 
-    getViewStock(): Observable<any>{
-        return this.http.get('/api/ViewStock').pipe(
-            catchError(this.handleError)
-        )
+    fetchInventory(): Observable<any>{
+        if(!this.inventory){
+            return this.http.get('/api/Inventory').pipe(
+                tap(response => this.inventory = response)
+            )
+        }else{
+            return of(this.inventory)
+        }
+    }
+
+    fetchClients(): Observable<any>{
+        if(!this.clients){
+            return this.http.get('/api/Client').pipe(
+                tap(response => this.clients = response)
+            )
+        }else{
+            return of(this.clients)
+        }
+    }
+
+    fetchCalibers(): Observable<any>{
+        if(!this.calibers){
+            return this.http.get('/api/Caliber').pipe(
+                tap(response => this.calibers = response)
+            )
+        }else{
+            return of(this.calibers)
+        }
+    }
+
+    fetchVariety(): Observable<any>{
+        if(!this.variety){
+            return this.http.get('/api/Variety').pipe(
+                tap(response => this.variety = response)
+            )
+        }else{
+            return of(this.variety)
+        }
+    }
+
+    fetchQuality(): Observable<any>{
+        if(!this.quality){
+            return this.http.get('/api/Quality').pipe(
+                tap(response => this.quality = response)
+            )
+        }else{
+            return of(this.quality)
+        }
+    }
+
+    fetchTypeBox(): Observable<any>{
+        if(!this.typeBox){
+            return this.http.get('/api/TypeBox').pipe(
+                tap(response => this.typeBox = response)
+            )
+        }else{
+            return of(this.typeBox)
+        }
+    }
+
+    fetchInventoryIssues(): Observable<any>{
+        if(!this.inventoryissues){
+            return this.http.get('/api/InventoryIssues').pipe(
+                tap(response => this.inventoryissues = response)
+            )
+        }else{
+            return of(this.inventoryissues)
+        }
+    }
+
+    fetchInventoryReasonIssues(): Observable<any>{
+        if(!this.inventoryreasonissues){
+            return this.http.get('/api/InventoryReasonIssues').pipe(
+                tap(response => this.inventoryreasonissues = response)
+            )
+        }else{
+            return of(this.inventoryreasonissues)
+        }
+    }
+
+    fetchPurchaseOrder(): Observable<any>{
+        if(!this.purchaseorder){
+            return this.http.get('/api/PurchaseOrder').pipe(
+                tap(response => this.purchaseorder = response)
+            )
+        }else{
+            return of(this.purchaseorder)
+        }
+    }
+
+    fetchPurchaseDetails(): Observable<any>{
+        if(!this.purchasedetails){
+            return this.http.get('/api/PurchaseDetails').pipe(
+                tap(response => this.purchasedetails = response)
+            )
+        }else{
+            return of(this.purchasedetails)
+        }
     }
 
     getClients(): Observable<any>{

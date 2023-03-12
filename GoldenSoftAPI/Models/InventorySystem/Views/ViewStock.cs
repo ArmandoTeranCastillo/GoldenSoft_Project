@@ -31,5 +31,8 @@ namespace GoldenSoftAPI.Models.InventorySystem.Views
 
         public Client client { get; set; } //One To Many
 
+        [NotMapped]
+        public bool IfStockIsZero => stock <= 0;
+
     }
 }

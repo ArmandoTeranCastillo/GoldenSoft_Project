@@ -20,7 +20,6 @@ export class InventoryComponent implements OnInit {
     quality;
     typebox;
     client;
-    purchaseorder;
 
     interval;
     scannerEnabled = true;
@@ -33,72 +32,63 @@ export class InventoryComponent implements OnInit {
         text: 'No.Cajas(Salida)',
     };
 
-    @ViewChild('dataGrid', {static: false}) grid!: DxDataGridComponent;
+    @ViewChild('dataGrid', {static: false}) dataGrid!: DxDataGridComponent;
 
     constructor(private publicService: PublicService) {}
 
     ngOnInit(): void {
         this.getInventory();
-        this.getCalibers();
-        this.getVariety();  
-        this.getQuality(); 
-        this.getTypeBox();
-        this.getClient();
+        this.fetchCalibers();
+        this.fetchVariety();  
+        this.fetchQuality(); 
+        this.fetchTypeBox();
+        this.fetchClient();
     }
 
     getInventory(){
-        //Cuando el observable obtenga respuesta
-        //Se podrá ejecutar la función
         this.publicService.getInventory().subscribe(
-        response => this.inventory = response,
-        error => console.log(error)
-        ) 
-     }
+            response => this.inventory = response,
+        )
+    }
+
+    fetchInventory(){
+        this.publicService.fetchInventory().subscribe(
+            response => this.inventory = response,
+        )
+    }
 
    getStockColumn(rowData){
       return rowData.stock;
     }
     
 
-   getCalibers(){
-        this.publicService.getCalibers().subscribe(
+    fetchCalibers(){
+        this.publicService.fetchCalibers().subscribe(
             response => this.calibers = response,
-            error => console.log(error)
         )
     }
 
-   getVariety(){
-        this.publicService.getVariety().subscribe(
+    fetchVariety(){
+        this.publicService.fetchVariety().subscribe(
             response => this.variety = response,
-            error => console.log(error)
         )
     }
 
-    getQuality(){
-        this.publicService.getQuality().subscribe(
+    fetchQuality(){
+        this.publicService.fetchQuality().subscribe(
             response => this.quality = response,
-            error => console.log(error)
         )
     }
 
-    getTypeBox(){
-        this.publicService.getTypeBox().subscribe(
+    fetchTypeBox(){
+        this.publicService.fetchTypeBox().subscribe(
             response => this.typebox = response,
-            error => console.log(error)
         )
     }
 
-    getClient(){
-        this.publicService.getClients().subscribe(
+    fetchClient(){
+        this.publicService.fetchClients().subscribe(
             response => this.client = response,
-            error => console.log(error)
-        )
-    }
-
-    getPurchaseOrder(){
-        this.publicService.getPurchaseOrder().subscribe(
-            response => this.purchaseorder = response,
-            error => console.log(error)
         )
     }
 
@@ -136,16 +126,13 @@ export class InventoryComponent implements OnInit {
         )    
     }
 
-      async updateInventory(e){
-        const {
-            id,
-            numberPallet,
-            numberBatch,
-            date,
-            numberBoxes,
-            barcode,
-        }  = e.data;
-    
+      updateInventory(e){
+          const Id = e.data.inventoryId;
+          const numberBatch = e.data.numberBatch;
+          const numberPallet = e.data.numberPallet;
+          const date = e.data.date;
+          const numberBoxes = e.data.noBoxes;
+          const barcode = e.data.barcode;
           const caliberId = e.data.caliber.id;
           const varietyId = e.data.variety.id;
           const qualityId = e.data.quality.id;
@@ -153,7 +140,7 @@ export class InventoryComponent implements OnInit {
           const clientId = e.data.client.id;
     
           const dataToSend = {
-            id,
+            Id,
             numberPallet,
             numberBatch,
             date,
@@ -166,7 +153,7 @@ export class InventoryComponent implements OnInit {
             clientId,
           };
         
-        await this.publicService.updateInventory(dataToSend).subscribe(
+        this.publicService.updateInventory(dataToSend).subscribe(
             response => {
                 console.log(response);
                 this.getInventory();
@@ -206,35 +193,25 @@ export class InventoryComponent implements OnInit {
     handleBarcode(barcode){
         const barcodeString = barcode;
         const barcodeArray = barcode.split("A")
+        const rowKey = this.inventory.find((rowKey) => rowKey.barcode === barcodeString);
+        
 
-        var rowKey = -1;
-        const dataSource = this.grid.instance.getDataSource();
-        const rowCount = dataSource.items().length;
-        for (let i = 0; i < rowCount; i++) {
-            const rowData = dataSource.items()[i];
-            if (rowData['barcode'] === barcodeString) {
-                 rowKey = i;
-                 break;
-            }
-        }
-
-        if(rowKey !== -1){
-            const rowElement = dataSource.items()[rowKey];
+        if(rowKey){
             const date = new Date();
             date.setHours(0,0,0,0);
             
             this.updateInventoryFromBarcode(
-            rowElement['inventoryId'],
-            rowElement['numberBatch'],
-            rowElement['numberPallet'],
+            rowKey.inventoryId,
+            rowKey.numberBatch,
+            rowKey.numberPallet,
             date,
-            rowElement['noBoxes'],
-            rowElement['barcode'],
-            rowElement['caliber'],
-            rowElement['variety'],
-            rowElement['quality'],
-            rowElement['typeBox'],
-            rowElement['client'],
+            rowKey.noBoxes + 1,
+            rowKey.barcode,
+            rowKey.caliber,
+            rowKey.variety,
+            rowKey.quality,
+            rowKey.typeBox,
+            rowKey.client
              ); 
         }
         else{
@@ -255,7 +232,7 @@ export class InventoryComponent implements OnInit {
                 parseInt(barcodeArray[6]) 
             );
         }
-        this.grid.instance.refresh();
+        
     }
 
     updateInventoryFromBarcode(id, numberBatch, numberPallet, date, noBoxes, barcode, caliber, variety, quality, typebox, client){
@@ -264,7 +241,7 @@ export class InventoryComponent implements OnInit {
         const qualityId = quality['id'];
         const typeboxId = typebox['id'];
         const clientId = client['id'];
-        const numberBoxes = noBoxes + 1;
+        const numberBoxes = noBoxes;
         const dataToSend = {
             id,
             numberPallet,
@@ -284,7 +261,7 @@ export class InventoryComponent implements OnInit {
             response => {
                 console.log(response);
                 this.getInventory();
-                this.grid.instance.refresh();
+                this.dataGrid.instance.refresh();
             }
         )
 
@@ -309,7 +286,7 @@ export class InventoryComponent implements OnInit {
             response => {
                 console.log(response);
                 this.getInventory();
-                this.grid.instance.refresh();
+                this.dataGrid.instance.refresh();
             }
           )
     }
@@ -337,5 +314,7 @@ export class InventoryComponent implements OnInit {
                 doc.save('DataGrid.pdf');
             });
         }
-    }  
+    }
+    
+    
 }

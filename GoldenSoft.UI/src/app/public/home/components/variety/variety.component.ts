@@ -12,7 +12,14 @@ export class VarietyComponent implements OnInit {
     constructor(private publicService: PublicService) {}
 
     ngOnInit(): void {
-        this.getVariety();
+        this.fetchVariety();
+    }
+
+    fetchVariety(){
+        this.publicService.fetchVariety().subscribe(
+            response => this.variety = response,
+            error => console.log(error)
+        )
     }
 
     getVariety(){

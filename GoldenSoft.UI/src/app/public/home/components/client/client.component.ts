@@ -11,7 +11,14 @@ export class ClientComponent implements OnInit {
     constructor(private publicService: PublicService) {}
 
     ngOnInit(): void {
-        this.getClients();
+        this.fetchClients();
+    }
+
+    fetchClients(){
+        this.publicService.fetchClients().subscribe(
+            response => this.clients = response,
+            error => console.log(error)
+        )
     }
 
     getClients(){

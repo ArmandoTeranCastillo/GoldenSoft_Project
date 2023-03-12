@@ -28,6 +28,14 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
                 .Include(i => i.client)
                 .ToListAsync();
 
+            foreach (var inv in inventory)
+            {
+                if (inv.IfStockIsZero)
+                {
+                    await DeleteInventory(inv.inventoryId);
+                }
+            }
+
             // Obtener la propiedad calculada "AvailableBoxes" para cada inventario
             var inventoryDtos = inventory.Select(i => new 
             {

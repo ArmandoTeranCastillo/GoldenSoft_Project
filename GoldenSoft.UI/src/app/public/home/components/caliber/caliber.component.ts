@@ -12,7 +12,14 @@ export class CaliberComponent implements OnInit {
     constructor(private publicService: PublicService) {}
 
     ngOnInit(): void {
-        this.getCalibers();
+        this.fetchCalibers();
+    }
+
+    fetchCalibers(){
+        this.publicService.fetchCalibers().subscribe(
+            response => this.calibers = response,
+            error => console.log(error)
+        )
     }
 
     getCalibers(){
