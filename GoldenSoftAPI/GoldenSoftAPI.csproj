@@ -7,7 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\InventorySystem\Views\**" />
+    <Content Remove="Controllers\InventorySystem\Views\**" />
+    <EmbeddedResource Remove="Controllers\InventorySystem\Views\**" />
+    <None Remove="Controllers\InventorySystem\Views\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BarcodeLib" Version="2.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.3">
       <PrivateAssets>all</PrivateAssets>
@@ -16,10 +24,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\InventorySystem\Views\" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.6" />
   </ItemGroup>
 
 </Project>

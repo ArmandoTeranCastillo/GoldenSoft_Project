@@ -65,7 +65,8 @@ export class BarcodeComponent implements OnInit {
 
     printImage(){
         try{
-            this.printerService.printDiv('barcode');
+            const printContent = document.getElementById('barcode');
+            this.printerService.printAngular(printContent, {width: '80mm', height: '40mm', 'font-size': '20pt', margin: '0mm'});
         }
         catch{
             console.log('impresion cancelada')

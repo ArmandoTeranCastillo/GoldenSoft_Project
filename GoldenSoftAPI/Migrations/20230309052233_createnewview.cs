@@ -10,8 +10,7 @@ namespace GoldenSoftAPI.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "vwInventoryStock");
+           
         }
 
         /// <inheritdoc />

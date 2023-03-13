@@ -1,5 +1,6 @@
 ﻿using GoldenSoftAPI.DataTransfer.InventorySystem.Caliber;
 using GoldenSoftAPI.Models.InventorySystem;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CaliberController : ControllerBase
     {
         private readonly DataContext _context;
@@ -17,7 +19,7 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
         }
 
         //Obtener todos los registros
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Admin")]
         public async Task<ActionResult<List<Caliber>>> GetAll()
         {
             return Ok(await _context.Calibers.ToListAsync());
