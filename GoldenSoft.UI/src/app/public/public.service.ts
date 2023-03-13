@@ -7,6 +7,7 @@ import { DxDataGridComponent } from "devextreme-angular";
 @Injectable()
 
 export class PublicService{
+    private token;
     private inventory;
     private clients;
     private calibers;
@@ -26,6 +27,12 @@ export class PublicService{
 
     //Lista de los observadores
     //Observador para inventario
+    verifyLogin(data: any): Observable<any>{
+        return this.http.post('/api/Auth/Login', data).pipe(
+            catchError(this.handleError)
+        )
+    }
+
     getInventory(): Observable<any>{
         return this.http.get('/api/Inventory').pipe(
             catchError(this.handleError)

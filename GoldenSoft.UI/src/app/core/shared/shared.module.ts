@@ -11,6 +11,7 @@ import { DxDataGridModule } from "devextreme-angular";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { CommonModule } from "@angular/common";
 import { NgxPrinterModule } from "ngx-printer";
+import { DxoLabelModule } from "devextreme-angular/ui/nested";
 
 //Estructura básica para la creación de Modulos (Porciones de código)
 //Esta estructura es muy importante para globalizar modulos
