@@ -1,31 +1,43 @@
-<h3 class="long-title">Bienvenido a GoldenSoft</h3>
 
-<div class= "login-container">
-    <form
-    (submit)="verifyLogin($event)">
-        <div>
-            <div>Usuario</div>
-            <dx-text-box>
-                <dx-validator>
-                    <dxi-validation-rule
-                    type="required"
-                    message="Usuario es requerido">
-                    </dxi-validation-rule>
-                </dx-validator>
-            </dx-text-box>
+<div class="container">
+    <h3 class="long-title">Bienvenido a GoldenSoft</h3>
+    <div class= "login-container">
+        <form
+        (submit)="verifyLogin($event)">
+            <div>
+                <div class="item">Usuario</div>
+                <dx-text-box class="text-box">
+                    <dx-validator>
+                        <dxi-validation-rule
+                        type="required"
+                        message="Usuario es requerido">
+                        </dxi-validation-rule>
+                    </dx-validator>
+                </dx-text-box>
+            </div>
+            <div>
+                <div class="item">Contraseña</div>
+                <dx-text-box class="text-box">
+                    <dx-validator>
+                        <dxi-validation-rule
+                        type="required"
+                        message="Contraseñaes requerida">
+                        </dxi-validation-rule>
+                    </dx-validator>
+                </dx-text-box>
+            </div>
+            <br>
+            <dx-button class="button" type="success" text="Ingresar" [useSubmitBehavior]="true">
+            </dx-button>
+        </form>
+    </div>
+    
+    <div *ngIf="isLoading" class="animation">
+        <div class="spinner-border text-primary mb-2" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div>
-        <div>
-            <div>Contraseña</div>
-            <dx-text-box>
-                <dx-validator>
-                    <dxi-validation-rule
-                    type="required"
-                    message="Contraseñaes requerida">
-                    </dxi-validation-rule>
-                </dx-validator>
-            </dx-text-box>
-        </div>
-        <dx-button type="default" text="Ingresar" [useSubmitBehavior]="true">
-        </dx-button>
-    </form>
+        <div style="font-size: 25px;">Loading...</div>
+      </div>
+    
 </div>
+

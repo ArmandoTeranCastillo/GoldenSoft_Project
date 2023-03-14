@@ -2,22 +2,56 @@
     width: 400px;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #5CDB95;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    background-color: aquamarine;
+    background-color: #379383;
   }
+
+.button{
+    color: #EDF5E1;
+    background-color: #05386B;
+    border: 1px, solid, #05386B;
+    font: bold;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', Verdana;
+}
+
+.text-box{
+    border: 1px, solid, #05386B;
+    margin-bottom: 5px;
+    background-color: #EDF5E1;
+    font-family: 'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', Verdana;
+}
+  .animation {
+    text-align: center;
+  }
+
+  .spinner-border {
+    width: 6rem;
+    height: 6rem;
+    border-width: 1rem;
+  }
+
+
 
 .long-title{
     font-family: 'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', Verdana;
-    font-weight: 200;
-    font-size: 28px;
+    font: bold;
+    font-weight: 600;
+    font-size: 50px;
     text-align: center;
     margin-bottom: 20px; 
-    color: aliceblue;
+    color: #05386B;
 }
 
 .item{
-    color: black;
+    font: bold;
+    font-weight: 800;
+    font-size: 16px;
+    margin-bottom: 3px;
+    color: #EDF5E1;
+    font-family: 'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', Verdana;
 }
 

@@ -1,5 +1,5 @@
 import { Injectable, ViewChild} from "@angular/core";
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable, of, throwError } from "rxjs";
 import {map, tap, catchError} from 'rxjs/operators';
 import { DxDataGridComponent } from "devextreme-angular";
@@ -27,8 +27,10 @@ export class PublicService{
 
     //Lista de los observadores
     //Observador para inventario
-    verifyLogin(data: any): Observable<any>{
-        return this.http.post('/api/Auth/Login', data).pipe(
+    verifyLogin(data: any): Observable<string>{
+        return this.http.post('/api/Auth/login', data, {
+            responseType: 'text',
+        }).pipe(
             catchError(this.handleError)
         )
     }
@@ -390,9 +392,13 @@ export class PublicService{
         )
     }
 
-    private handleError(error: Response){
-        console.log(error);
-        const msg = 'Error status code' + error.status + 'status' + error.statusText;
+    private handleError(error: HttpErrorResponse){
+        const msg = error.error;
+        return throwError(msg);
+    }
+
+    private handleErrorLogin(error: HttpErrorResponse){
+        const msg = error.error;
         return throwError(msg);
     }
 }

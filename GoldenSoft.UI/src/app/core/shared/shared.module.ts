@@ -8,10 +8,13 @@ import { DxListModule } from "devextreme-angular";
 import { DxDataGridModule } from "devextreme-angular";
 
 
+
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { CommonModule } from "@angular/common";
 import { NgxPrinterModule } from "ngx-printer";
 import { DxoLabelModule } from "devextreme-angular/ui/nested";
+import { CookieModule } from "ngx-cookie";
+import { VigilanteGuard } from "src/app/vigilante.guard";
 
 //Estructura básica para la creación de Modulos (Porciones de código)
 //Esta estructura es muy importante para globalizar modulos
@@ -32,6 +35,7 @@ import { DxoLabelModule } from "devextreme-angular/ui/nested";
         DxValidatorModule,
         DxTextBoxModule,
         DxDateBoxModule,
+        CookieModule.withOptions(),
         NgxPrinterModule.forRoot({printOpenWindow: false}),
     ],
     declarations: [
@@ -39,6 +43,7 @@ import { DxoLabelModule } from "devextreme-angular/ui/nested";
     ],
     exports: [
         HttpClientModule,
+        CommonModule,
         RouterModule,
         DxDrawerModule,
         DxToolbarModule,
@@ -51,9 +56,10 @@ import { DxoLabelModule } from "devextreme-angular/ui/nested";
         DxValidatorModule,
         NgxPrinterModule,
         DxDateBoxModule,
+        CookieModule,
         NotFoundComponent
     ],
-    providers: []
+    providers: [VigilanteGuard]
 })
 
 export class SharedModule{

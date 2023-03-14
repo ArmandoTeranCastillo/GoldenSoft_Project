@@ -17,6 +17,7 @@ import { PurchaseDetailsComponent } from "./home/components/purchaseDetails/purc
 import { InventoryIssuesComponent } from "./home/components/inventoryIssues/inventoryIssues.component";
 import { InventoryReasonIssuesComponent } from "./home/components/inventoryReasonIssues/inventoryReasonIssues.component";
 import { BarcodeComponent } from "./home/components/barcode/barcode.component";
+import { VigilanteGuard } from "../vigilante.guard";
 //Estructura básica para la creación de Modulos (Porciones de código)
 @NgModule({
     imports: [

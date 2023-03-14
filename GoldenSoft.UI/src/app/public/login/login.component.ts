@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { PublicService } from '../public.service';
 import notify from 'devextreme/ui/notify';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
     selector: 'app-login',
@@ -13,9 +15,10 @@ export class LoginComponent implements OnInit {
     
     isLoading = false;
 
-    constructor(private publicService: PublicService, private router : Router) { }
+    constructor(private cookieService: CookieService, private publicService: PublicService, private router : Router) { }
 
     ngOnInit() { 
+        localStorage.clear();
     }
 
     verifyLogin(e){
@@ -27,16 +30,19 @@ export class LoginComponent implements OnInit {
             username,
             password
         }
-        this.publicService.verifyLogin(dataToSend).subscribe((data) => {
+
+        this.publicService.verifyLogin(dataToSend).subscribe(
+            (data: string) => {
+            console.log(data)
             // Si la autenticación es exitosa, redireccionamos a la página Home
-            this.router.navigate(['/home']);
             // Guardamos el token en el local storage para usarlo en los servicios
-            localStorage.setItem('token', data.token);
+            localStorage.setItem('token', data);
+            notify('Bienvenido', 'success', 3000)
+            this.router.navigate(['/', 'home']);
             },
-            (error) => {
-            // Si la autenticación falla, mostramos un mensaje de error al usuario
-            notify({ message: error, width: 400 }, 'error', 3000);
-            }
+            (error: HttpErrorResponse) => {
+                notify(error, 'error', 3000);
+              }
         ).add(() => {
             //Finalizacion del servicio
             this.isLoading = false;

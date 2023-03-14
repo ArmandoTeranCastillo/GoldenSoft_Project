@@ -61,12 +61,12 @@ namespace GoldenSoftAPI.Controllers
             var users = await _context.users.FirstOrDefaultAsync(i => i.Username == request.Username);
             if (users == null)
             {
-                return BadRequest("User not found");
+                return BadRequest("Usuario no encontrado");
             }
 
             if(!VerifyPasswordHash(request.Password, users.PasswordHash, users.PasswordSalt))
             {
-                return BadRequest("Wrong Password");
+                return BadRequest("Contraseña Incorrecta");
             }
             string token = CreateToken(user);
             return Ok(token);

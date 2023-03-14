@@ -4,6 +4,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { PublicComponent } from "./public.component";
 import { HomeComponent } from "./home/containers/home.component";
 import { LoginComponent } from "./login/login.component";
+import { VigilanteGuard } from "../vigilante.guard";
 
 
 const routes : Routes = [
@@ -14,7 +15,7 @@ const routes : Routes = [
         children:
         [ //Definir array de rutas
             {path:'', redirectTo: 'login', pathMatch: 'full'},    
-            {path:'home', component: HomeComponent},
+            {path:'home', component: HomeComponent, canActivate: [VigilanteGuard]},
             {path:'login', component: LoginComponent},
         ]
     },
