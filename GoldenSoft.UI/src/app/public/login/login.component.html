@@ -17,7 +17,7 @@
             </div>
             <div>
                 <div class="item">Contraseña</div>
-                <dx-text-box class="text-box">
+                <dx-text-box class="text-box" mode="password">
                     <dx-validator>
                         <dxi-validation-rule
                         type="required"
@@ -34,9 +34,9 @@
     
     <div *ngIf="isLoading" class="animation">
         <div class="spinner-border text-primary mb-2" role="status">
-          <span class="visually-hidden">Loading...</span>
+          <span class="visually-hidden">Cargando...</span>
         </div>
-        <div style="font-size: 25px;">Loading...</div>
+        <div style="font-size: 25px;">Cargando...</div>
       </div>
     
 </div>

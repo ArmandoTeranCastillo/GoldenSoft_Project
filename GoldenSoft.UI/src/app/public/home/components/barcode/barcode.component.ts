@@ -42,6 +42,7 @@ export class BarcodeComponent implements OnInit {
 
     generateValue;
 
+    isLoading = false;
 
     box = {
         lote: '',
@@ -116,9 +117,10 @@ export class BarcodeComponent implements OnInit {
     }
     changeClient(){
         this.clientvalue = true;
-}
+    }
 
     getBarcode(){
+        this.isLoading = true;
         this.batchfield = this.dxbatch.instance.option('value') + "A";
         this.palletfield = this.dxpallet.instance.option('value') + "A";
         this.caliberfield = this.dxcaliber.value.id + "A";
@@ -139,7 +141,7 @@ export class BarcodeComponent implements OnInit {
         this.publicService.getBarcode(this.data).subscribe(
             (blob: Blob) => {this.barcode = URL.createObjectURL(blob);
             this.sanitizerBarcode = this.sanitizer.bypassSecurityTrustUrl(this.barcode);
-            });
+            }).add(() => this.isLoading = false);
         this.generateValue = true;
     }
 

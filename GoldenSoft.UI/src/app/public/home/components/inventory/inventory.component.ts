@@ -6,6 +6,7 @@ import { exportDataGrid } from 'devextreme/excel_exporter';
 import { exportDataGrid as exportDataGridToPdf } from 'devextreme/pdf_exporter';
 import { jsPDF } from 'jspdf';
 import { DxDataGridComponent } from "devextreme-angular";
+import notify from "devextreme/ui/notify";
 
 
 @Component({
@@ -122,6 +123,7 @@ export class InventoryComponent implements OnInit {
               console.log(response);
               this.getInventory();
               e.component.refresh();
+              notify('Registro Creado', 'success', 3000);
           }
         )    
     }
@@ -158,6 +160,7 @@ export class InventoryComponent implements OnInit {
                 console.log(response);
                 this.getInventory();
                 e.component.refresh();
+                notify('Registro Actualizado', 'success', 3000);
             }
         )   
     }
@@ -166,6 +169,7 @@ export class InventoryComponent implements OnInit {
         this.publicService.deleteInventory(e.data.inventoryId).subscribe(
             response => {
                 console.log(response)
+                notify("Registro Eliminado", "success", 3000);
             }
         )
     }
@@ -262,6 +266,7 @@ export class InventoryComponent implements OnInit {
                 console.log(response);
                 this.getInventory();
                 this.dataGrid.instance.refresh();
+                notify("Registro Actualizado", "success", 3000);
             }
         )
 
@@ -287,6 +292,7 @@ export class InventoryComponent implements OnInit {
                 console.log(response);
                 this.getInventory();
                 this.dataGrid.instance.refresh();
+                notify("Registro Creado", "success", 3000);
             }
           )
     }

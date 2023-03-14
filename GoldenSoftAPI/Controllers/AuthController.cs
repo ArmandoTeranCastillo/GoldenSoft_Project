@@ -68,8 +68,62 @@ namespace GoldenSoftAPI.Controllers
             {
                 return BadRequest("Contraseña Incorrecta");
             }
-            string token = CreateToken(user);
+            string token = CreateToken(users);
+
+            var refreshToken = GenerateRefreshToken();
+            SetRefreshToken(refreshToken, users);
+
             return Ok(token);
+        }
+
+        [HttpPost("refresh-token")]
+        public async Task<ActionResult<string>> RefreshToken()
+        {
+            var refreshToken = Request.Cookies["refreshToken"];
+            var users = await _context.users.FirstOrDefaultAsync(i => i.RefreshToken == refreshToken);
+
+            if(users == null)
+            {
+                return Unauthorized("Refresh Token no encontrado");
+            } 
+            else if(users.TokenExpires < DateTime.Now)
+            {
+                return Unauthorized("Token Expired");
+            }
+
+            string token = CreateToken(users);
+            var newRefreshToken = GenerateRefreshToken();
+            SetRefreshToken(newRefreshToken, users);
+
+            return Ok(token);
+        }
+
+        private RefreshToken GenerateRefreshToken()
+        {
+            var refreshToken = new RefreshToken
+            {
+                Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
+                Expires = DateTime.Now.AddDays(7),
+                Created = DateTime.Now
+            };
+
+            return refreshToken;
+        }
+
+        private void SetRefreshToken(RefreshToken newRefreshToken, User user)
+        {
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = newRefreshToken.Expires,
+            };
+            Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
+
+            user.RefreshToken = newRefreshToken.Token;
+            user.TokenCreated = newRefreshToken.Created;
+            user.TokenExpires = newRefreshToken.Expires;
+
+            _context.SaveChanges();
         }
 
 
@@ -78,7 +132,7 @@ namespace GoldenSoftAPI.Controllers
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.Role, "User")
+                new Claim(ClaimTypes.Role, "Admin")
 
             };
 

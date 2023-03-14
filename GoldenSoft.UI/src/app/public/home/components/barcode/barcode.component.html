@@ -2,6 +2,13 @@
     <h3>Generador de Código de Barras</h3>
 </div>
 
+<div *ngIf="isLoading" class="animation">
+    <div class="spinner-border text-primary mb-2" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+    <div style="font-size: 25px;">Cargando...</div>
+  </div>
+
 <div id="barcode" style="text-align: center; margin-bottom: 20px;">
     <img [src]="sanitizerBarcode" alt="" style="width: 400px;">
 </div>
@@ -97,9 +104,9 @@
         style="width: 200;">
         Imprimir
 </button>
-
-
 </div>
+
+
 
 
 <!--<dx-button

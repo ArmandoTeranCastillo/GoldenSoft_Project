@@ -7,5 +7,8 @@
         public DateTime Created { get; set; } = DateTime.Now;
 
         public DateTime Expires { get; set; } = DateTime.Now;
+
+        
+
     }
 }
