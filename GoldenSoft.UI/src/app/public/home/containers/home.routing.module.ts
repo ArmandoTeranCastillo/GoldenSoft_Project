@@ -14,6 +14,7 @@ import { PurchaseDetailsComponent } from "../components/purchaseDetails/purchase
 import { InventoryIssuesComponent } from "../components/inventoryIssues/inventoryIssues.component";
 import { InventoryReasonIssuesComponent } from "../components/inventoryReasonIssues/inventoryReasonIssues.component";
 import { BarcodeComponent } from "../components/barcode/barcode.component";
+import { VigilanteGuard } from "src/app/vigilante.guard";
 
 const routes: Routes = [
     {
@@ -21,17 +22,17 @@ const routes: Routes = [
         component: HomeComponent,
         children: [
             {path: '', redirectTo: 'inventory', pathMatch: 'full'},
-            {path: 'inventory', component: InventoryComponent},
-            {path: 'client', component: ClientComponent},
-            {path: 'caliber', component: CaliberComponent},
-            {path: 'variety', component: VarietyComponent},
-            {path: 'quality', component: QualityComponent},
-            {path: 'typebox', component: TypeBoxComponent},
-            {path: 'purchaseOrder', component: PurchaseOrderComponent},
-            {path: 'purchaseDetails', component: PurchaseDetailsComponent},
-            {path: 'inventoryIssues', component: InventoryIssuesComponent},
-            {path: 'inventoryReasonIssues', component: InventoryReasonIssuesComponent},
-            {path: 'barcode', component: BarcodeComponent},
+            {path: 'inventory', component: InventoryComponent, canActivate: [VigilanteGuard]},
+            {path: 'client', component: ClientComponent, canActivate: [VigilanteGuard]},
+            {path: 'caliber', component: CaliberComponent, canActivate: [VigilanteGuard]},
+            {path: 'variety', component: VarietyComponent, canActivate: [VigilanteGuard]},
+            {path: 'quality', component: QualityComponent, canActivate: [VigilanteGuard]},
+            {path: 'typebox', component: TypeBoxComponent, canActivate: [VigilanteGuard]},
+            {path: 'purchaseOrder', component: PurchaseOrderComponent, canActivate: [VigilanteGuard]},
+            {path: 'purchaseDetails', component: PurchaseDetailsComponent, canActivate: [VigilanteGuard]},
+            {path: 'inventoryIssues', component: InventoryIssuesComponent, canActivate: [VigilanteGuard]},
+            {path: 'inventoryReasonIssues', component: InventoryReasonIssuesComponent, canActivate: [VigilanteGuard]},
+            {path: 'barcode', component: BarcodeComponent, canActivate: [VigilanteGuard]},
             {path: '**', component: NotFoundComponent}
         ]
     }

@@ -18,12 +18,16 @@ import { InventoryIssuesComponent } from "./home/components/inventoryIssues/inve
 import { InventoryReasonIssuesComponent } from "./home/components/inventoryReasonIssues/inventoryReasonIssues.component";
 import { BarcodeComponent } from "./home/components/barcode/barcode.component";
 import { VigilanteGuard } from "../vigilante.guard";
+
+import { UserHomeComponent } from "./home/containers/userhome/userhome.component";
+import { UserHomeRoutingModule } from "./home/containers/userhome/userhome.routing.module";
 //Estructura básica para la creación de Modulos (Porciones de código)
 @NgModule({
     imports: [
         PublicRoutingModule,
         HomeRoutingModule,
-        SharedModule
+        SharedModule,
+        UserHomeRoutingModule
     ],
     declarations: [
         PublicComponent,
@@ -39,7 +43,8 @@ import { VigilanteGuard } from "../vigilante.guard";
         PurchaseDetailsComponent,
         InventoryIssuesComponent,
         InventoryReasonIssuesComponent,
-        BarcodeComponent
+        BarcodeComponent,
+        UserHomeComponent
       
     ],
     exports: [],

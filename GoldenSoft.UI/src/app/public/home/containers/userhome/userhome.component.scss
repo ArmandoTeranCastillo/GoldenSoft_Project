@@ -1,0 +1,44 @@
+/* ... */
+::ng-deep .dx-overlay-content {
+    background-color: lightgray;
+}
+
+
+::ng-deep {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+::ng-deep #toolbar {
+    background-color: #0E8388;
+    padding: 5px 10px;
+ 
+}
+::ng-deep .dx-toolbar-button .dx-button {
+    background-color:  rgba(191, 191, 191, -0.15);
+    border: none;
+}
+::ng-deep .dx-toolbar-button > .dx-toolbar-item-content {
+    margin-left: -7px;
+}
+
+::ng-deep .dx-list-item-icon {
+    margin-right: 10px;
+}
+::ng-deep #view {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.container{
+    display: grid;
+    padding: 1%;
+}
+
+.long-title{
+  font-family: 'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', Verdana;
+  font-weight: 200;
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 20px;
+}

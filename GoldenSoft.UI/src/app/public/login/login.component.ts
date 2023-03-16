@@ -32,13 +32,14 @@ export class LoginComponent implements OnInit {
         }
 
         this.publicService.verifyLogin(dataToSend).subscribe(
-            (data: string) => {
-            console.log(data)
-            // Si la autenticación es exitosa, redireccionamos a la página Home
-            // Guardamos el token en el local storage para usarlo en los servicios
-            localStorage.setItem('token', data);
-            notify('Bienvenido', 'success', 3000)
-            this.router.navigate(['/', 'home']);
+            (data) => {
+                console.log(data);
+                //Guardamos el token en el local storage
+                localStorage.setItem('token', data['token']);
+                localStorage.setItem('role', data['role']);
+                //Redirigimos al usuario a la pagina principal
+                this.router.navigate(['/', 'home']);
+                notify('Bienvenido', 'success', 3000);
             },
             (error: HttpErrorResponse) => {
                 notify(error, 'error', 3000);

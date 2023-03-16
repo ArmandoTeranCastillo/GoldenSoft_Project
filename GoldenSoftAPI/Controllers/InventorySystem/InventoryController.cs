@@ -1,6 +1,7 @@
 ﻿using GoldenSoftAPI.DataTransfer.InventorySystem.Inventory;
 using GoldenSoftAPI.Models.InventorySystem;
 using GoldenSoftAPI.Models.InventorySystem.Views;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class InventoryController : ControllerBase
     {
         private readonly DataContext _context;

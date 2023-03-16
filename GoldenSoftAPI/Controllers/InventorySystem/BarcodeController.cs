@@ -1,4 +1,5 @@
 ﻿using BarcodeLib;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing;
@@ -7,6 +8,7 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BarcodeController : ControllerBase
     {
         [HttpGet]

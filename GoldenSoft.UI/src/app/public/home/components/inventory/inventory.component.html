@@ -2,7 +2,7 @@
     <h3>Tabla de Inventario</h3>
 </div>
 
-<div #gridContainer style="height: 500px;">
+<div #gridContainer style="height: 300px;">
 <dx-data-grid 
     #dataGrid
     id="dataGrid"
@@ -16,6 +16,7 @@
     (onRowInserted)="createInventory($event)"
     (onRowUpdated)="updateInventory($event)"
     (onRowRemoved)="deleteInventory($event)"
+    style="background-color: aqua;"
     >
     <dxo-export
     [enabled]="true"

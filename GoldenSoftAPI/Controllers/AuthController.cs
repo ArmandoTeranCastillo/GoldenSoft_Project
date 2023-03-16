@@ -27,7 +27,7 @@ namespace GoldenSoftAPI.Controllers
         }
        
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserDto request)
+        public async Task<ActionResult<User>> Register(RegisterUserDto request)
         {
            
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
@@ -36,27 +36,18 @@ namespace GoldenSoftAPI.Controllers
                 Username = request.Username,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
+                Role = request.Role
             };
 
             _context.users.Add(users);
             await _context.SaveChangesAsync();
 
-         
-           /* var newVariety = new Variety
-            {
-                nameVariety = request.nameVariety
-            };
-
-            _context.Variety.Add(newVariety);
-            await _context.SaveChangesAsync();
-
-            return Ok(await _context.Variety.ToListAsync());*/
 
             return Ok(users);
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserDto request)
+        public async Task<ActionResult<string>> Login(LoginUserDto request)
         {
             var users = await _context.users.FirstOrDefaultAsync(i => i.Username == request.Username);
             if (users == null)
@@ -73,7 +64,13 @@ namespace GoldenSoftAPI.Controllers
             var refreshToken = GenerateRefreshToken();
             SetRefreshToken(refreshToken, users);
 
-            return Ok(token);
+            var newResponse = new LoginResponseDto
+            {
+                Token = token,
+                Role = users.Role,
+            };
+
+            return Ok(newResponse);
         }
 
         [HttpPost("refresh-token")]
@@ -94,8 +91,17 @@ namespace GoldenSoftAPI.Controllers
             string token = CreateToken(users);
             var newRefreshToken = GenerateRefreshToken();
             SetRefreshToken(newRefreshToken, users);
-
+                  
+       
             return Ok(token);
+        }
+
+        [HttpGet("refresh-token")]
+        public async Task<ActionResult<string>> GetRefreshToken()
+        {
+            var refreshToken = Request.Cookies["refreshToken"];
+
+            return Ok(refreshToken);
         }
 
         private RefreshToken GenerateRefreshToken()
@@ -132,7 +138,7 @@ namespace GoldenSoftAPI.Controllers
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.Role, "Admin")
+                new Claim(ClaimTypes.Role, user.Role)
 
             };
 

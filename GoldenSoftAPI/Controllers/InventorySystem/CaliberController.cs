@@ -19,7 +19,7 @@ namespace GoldenSoftAPI.Controllers.InventorySystem
         }
 
         //Obtener todos los registros
-        [HttpGet, Authorize(Roles = "Admin")]
+        [HttpGet]
         public async Task<ActionResult<List<Caliber>>> GetAll()
         {
             return Ok(await _context.Calibers.ToListAsync());

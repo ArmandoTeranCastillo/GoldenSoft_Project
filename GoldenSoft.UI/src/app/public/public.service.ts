@@ -27,13 +27,12 @@ export class PublicService{
 
     //Lista de los observadores
     //Observador para inventario
-    verifyLogin(data: any): Observable<string>{
-        return this.http.post('/api/Auth/login', data, {
-            responseType: 'text',
-        }).pipe(
+    verifyLogin(data: any): Observable<any>{
+        return this.http.post('/api/Auth/login', data).pipe(
             catchError(this.handleError)
         )
     }
+
 
     getInventory(): Observable<any>{
         return this.http.get('/api/Inventory').pipe(
