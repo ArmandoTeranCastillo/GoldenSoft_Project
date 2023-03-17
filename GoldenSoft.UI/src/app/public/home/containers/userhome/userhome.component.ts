@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {confirm} from 'devextreme/ui/dialog';
 
 @Component({
     selector: 'app-userhome',
@@ -22,6 +23,16 @@ constructor(private router : Router) { }
 ngOnInit() {
     this.router.navigate(['/userhome', 'inventory'])
  }
+
+ exitPage() {
+    let result = confirm("<i>Seguro que quieres salir?</i>", "");
+    result.then((dialogResult) => {
+        if(dialogResult) {
+            this.router.navigate(['/login'])
+        }
+    });
+ }
+
 
  isDrawerOpen: boolean = false;
  buttonOptions: any = {

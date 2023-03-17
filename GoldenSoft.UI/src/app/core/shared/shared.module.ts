@@ -6,6 +6,7 @@ import { DxToolbarModule } from "devextreme-angular";
 import { DxButtonModule } from "devextreme-angular";
 import { DxListModule } from "devextreme-angular";
 import { DxDataGridModule } from "devextreme-angular";
+import { DxScrollViewModule } from "devextreme-angular";
 
 
 
@@ -35,6 +36,7 @@ import { VigilanteGuard } from "src/app/vigilante.guard";
         DxValidatorModule,
         DxTextBoxModule,
         DxDateBoxModule,
+        DxScrollViewModule,
         CookieModule.withOptions(),
         NgxPrinterModule.forRoot({printOpenWindow: false}),
     ],
@@ -52,6 +54,7 @@ import { VigilanteGuard } from "src/app/vigilante.guard";
         DxDataGridModule,
         DxFormModule,
         DxSelectBoxModule,
+        DxScrollViewModule,
         DxTextBoxModule,
         DxValidatorModule,
         NgxPrinterModule,

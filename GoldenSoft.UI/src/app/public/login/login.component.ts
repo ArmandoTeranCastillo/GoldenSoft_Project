@@ -19,7 +19,9 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() { 
         localStorage.clear();
+        this.cookieService.removeAll();
     }
+
 
     verifyLogin(e){
         e.preventDefault();
@@ -34,11 +36,17 @@ export class LoginComponent implements OnInit {
         this.publicService.verifyLogin(dataToSend).subscribe(
             (data) => {
                 console.log(data);
+                localStorage.clear();
                 //Guardamos el token en el local storage
                 localStorage.setItem('token', data['token']);
                 localStorage.setItem('role', data['role']);
+                if(data['role'] == 'Admin'){
+                    this.router.navigate(['/', 'home']);
+                }
+                else{
+                    this.router.navigate(['/', 'userhome']);
+                }
                 //Redirigimos al usuario a la pagina principal
-                this.router.navigate(['/', 'home']);
                 notify('Bienvenido', 'success', 3000);
             },
             (error: HttpErrorResponse) => {

@@ -3,10 +3,13 @@
     background-color: lightgray;
 }
 
-
 ::ng-deep {
     margin-left: 10px;
     margin-top: 10px;
+}
+
+::ng-deep .dx-list-item{
+    border-color: #0E8388;
 }
 
 ::ng-deep #toolbar {
@@ -42,3 +45,9 @@
   text-align: center;
   margin-bottom: 20px;
 }
+
+.welcome{
+    font-family: 'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', Verdana;
+    font-weight: 200;
+    font-size: 28px;
+  }

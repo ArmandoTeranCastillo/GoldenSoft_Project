@@ -7,10 +7,10 @@ import { Component, HostListener } from '@angular/core';
 })
 export class AppComponent {
   title = 'GoldenSoft.UI';
-  /*@HostListener('window:beforeunload', ['$event'])
+  @HostListener('window:beforeunload', ['$event'])
   beforeunloadHandler(event: Event) {
     localStorage.clear();
-  }*/
+  }
   constructor() {}
 
   

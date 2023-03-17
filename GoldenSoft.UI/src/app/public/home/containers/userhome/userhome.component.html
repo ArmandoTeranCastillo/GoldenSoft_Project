@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-lg " style="background-color: #2C3333;">
-    <a class="navbar-brand" style="color: #CBE4DE;">Bienvenido</a>
+    <a class="navbar-brand welcome" style="margin-left: 15px; margin-right: 5px; color: #CBE4DE;">Bienvenido</a>
+    <img src="assets/manzana-50.png" style="width: 35px; margin-right: 80%;">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -7,15 +8,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-0">
         <li class="nav-item">
-          <a class="nav-link" href="/login" style="color: #CBE4DE;">
-            <i class="fa fa-sign-out" aria-hidden="true"></i> Salir
-          </a>
+          <button class="nav-link" (click)="exitPage()" style="background-color: #2C3333; color: #CBE4DE; border: none;">Salir</button>
         </li>
       </ul>
     </div>
   </nav>
 
-<dx-toolbar id="toolbar">
+<dx-toolbar id="toolbar" style="background-color: #0E8388;">
     <dxi-item
         widget="dxButton"
         [options]="buttonOptions"
@@ -25,12 +24,11 @@
 
 <dx-drawer
     template="template"
-    [height]="900"
+    [height]="500"
     [minSize]="37"
     revealMode="expand"
     openedStateMode="shrink"
     [(opened)]="isDrawerOpen"
-
     [closeOnOutsideClick]="true"
     style="background-color: rgb(227, 208, 183);">
     <div *dxTemplate="let data of 'template'">
@@ -55,6 +53,14 @@
         </dx-list>
     </div>
     <div id="view" class="container">
-        <router-outlet></router-outlet>
+        <dx-scroll-view
+        [scrollByContent]="true"
+        [scrollByThumb]="true"
+        [bounceEnabled]="true"
+        height="500px"
+        width="100%"
+        style="margin-bottom: 10px; margin-top: 0%;">
+            <router-outlet></router-outlet>
+        </dx-scroll-view>
     </div>
 </dx-drawer>

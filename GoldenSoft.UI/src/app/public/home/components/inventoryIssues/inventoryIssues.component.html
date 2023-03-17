@@ -24,6 +24,13 @@
         <dxo-lookup [dataSource]="inventoryreasonissues" valueExpr="id" displayExpr="reasons"></dxo-lookup>
     </dxi-column>
 
+    <dxo-summary>
+        <dxi-total-item
+        column="numberIssues"
+        summaryType="sum">
+        </dxi-total-item>
+    </dxo-summary>
+
     <dxo-editing
         mode="popup"   
         [allowUpdating]="true"

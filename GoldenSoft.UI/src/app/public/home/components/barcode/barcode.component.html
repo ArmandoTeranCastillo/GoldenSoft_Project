@@ -95,15 +95,16 @@
                   varietyvalue &&
                   qualityvalue &&
                   typeboxvalue)"
-    style="margin-right: 5px;"
+    style="margin-right: 5px; margin-top: 20px;"
 ></dx-button>
 
-<button [disabled]="!(generateValue)"
+<dx-button [disabled]="!(generateValue)"
         type="default" 
         (click) ="printImage()"
-        style="width: 200;">
+        stylingMode="contained"
+        style="margin-top: 20px;">
         Imprimir
-</button>
+</dx-button>
 </div>
 
 

@@ -1,21 +1,16 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand">Bienvenido</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
+<nav class="navbar navbar-expand-lg" style="background-color: #2C3333">
+    <a class="navbar-brand welcome" style="margin-left: 15px; margin-right: 5px; background-color: #2C3333; color: #F9F5EB;">Bienvenido</a>
+    <img src="assets/manzana-50.png" style="width: 35px; margin-right: 80%;">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-0">
         <li class="nav-item">
-          <a class="nav-link" href="/login">
-            <i class="fa fa-sign-out" aria-hidden="true"></i> Salir
-          </a>
+          <button class="nav-link" (click)="exitPage()" style="border: none; background-color: #2C3333; color: #F9F5EB;">Salir</button>
         </li>
       </ul>
     </div>
   </nav>
 
-<dx-toolbar id="toolbar">
+<dx-toolbar id="toolbar" style="background-color: rgba(235, 19, 19, 0.795);">
     <dxi-item
         widget="dxButton"
         [options]="buttonOptions"
@@ -25,13 +20,13 @@
 
 <dx-drawer
     template="template"
-    [height]="900"
+    [height]="500"
     [minSize]="37"
     revealMode="expand"
     openedStateMode="shrink"
     [(opened)]="isDrawerOpen"
     [closeOnOutsideClick]="true"
-    style="background-color: antiquewhite;">
+    style="background-color: rgb(227, 208, 183);">
     <div *dxTemplate="let data of 'template'">
         <dx-list 
             [items] = "navigation" 
@@ -40,18 +35,26 @@
             (onSelectionChanged)="this.isDrawerOpen = false"
             itemTemplate="links">
             <div *dxTemplate="let link of 'links'">
-                <a [routerLink]="['/' + link.path]">
+                <a [routerLink]="['/' + link.path]" style="text-decoration: none;">
                     <div>
                         <div class="dx-list-item-icon-container">
                             <i class="dx-icon dx-list-item-icon dx-icon-{{link.icon}}"></i>
                         </div>
-                        <span>{{link.text}}</span>
+                        <span style="color: black;">{{link.text}}</span>
                     </div>
                 </a>
             </div>
         </dx-list>
     </div>
     <div id="view" class="container">
-        <router-outlet></router-outlet>
+        <dx-scroll-view
+        [scrollByContent]="true"
+        [scrollByThumb]="true"
+        [bounceEnabled]="true"
+        height="500px"
+        width="100%"
+        style="margin-bottom: 10px; margin-top: 0%; margin-left: 10px;">
+            <router-outlet></router-outlet>
+        </dx-scroll-view>
     </div>
 </dx-drawer>

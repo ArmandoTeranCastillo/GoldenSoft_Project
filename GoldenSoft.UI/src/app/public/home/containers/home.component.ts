@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PublicService } from '../../public.service';
 import { Router } from '@angular/router';
+import {confirm} from 'devextreme/ui/dialog';
 
 @Component({
     selector: 'app-home',
@@ -31,6 +32,15 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         this.router.navigate(['/home', 'inventory'])
+     }
+
+     exitPage() {
+        let result = confirm("<i>Seguro que quieres salir?</i>", "");
+        result.then((dialogResult) => {
+            if(dialogResult) {
+                this.router.navigate(['/login'])
+            }
+        });
      }
 
      isDrawerOpen: boolean = false;

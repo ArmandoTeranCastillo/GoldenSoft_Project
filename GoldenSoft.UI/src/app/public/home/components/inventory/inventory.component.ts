@@ -33,6 +33,19 @@ export class InventoryComponent implements OnInit {
         text: 'No.Cajas(Salida)',
     };
 
+    readonly allowedPageSizes = [5, 10, 'all'];
+
+    readonly displayModes = [{ text: "Display Mode 'full'", value: 'full' }, { text: "Display Mode 'compact'", value: 'compact' }];
+
+    displayMode = 'full';
+
+    showPageSizeSelector = true;
+
+    showInfo = true;
+
+    showNavButtons = true;
+
+
     @ViewChild('dataGrid', {static: false}) dataGrid!: DxDataGridComponent;
 
     constructor(private publicService: PublicService) {}

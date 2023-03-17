@@ -11,7 +11,7 @@
     [allowColumnReordering]="false"
     [allowColumnResizing]="true"
     [columnAutoWidth]="true"
-    [showRowLines]= "true"
+    [showBorders]="true"
     (onExporting)="exportData($event)"
     (onRowInserted)="createInventory($event)"
     (onRowUpdated)="updateInventory($event)"
@@ -23,29 +23,72 @@
     [formats]="['xlsx', 'pdf']">
     </dxo-export>
     <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
-    <dxi-column dataField="inventoryId" caption="Registro" fixed="true" [allowEditing]="false" ></dxi-column>
-    <dxi-column dataField="numberPallet" caption="Tarima" fixed="true" ></dxi-column>
-    <dxi-column dataField="numberBatch" caption="No.Lote" fixed="true"></dxi-column>
-    <dxi-column dataField="date" caption="Fecha" fixed="true" dataType="date"></dxi-column>
-    <dxi-column dataField="noBoxes" caption="No.Cajas(Stock)" fixed="true" [calculateDisplayValue]="getStockColumn"></dxi-column>
-    <dxi-column dataField="noIssues" [visible]="false"></dxi-column>
-    <dxi-column dataField="stock" [visible]="false"></dxi-column>
-    <dxi-column dataField="barcode" caption="Código" fixed="true"></dxi-column>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-search-panel [visible]="true"></dxo-search-panel>
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
+    <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
+  <dxo-paging [pageSize]="10"> </dxo-paging>
+  <dxo-pager
+    [visible]="true"
+    [allowedPageSizes]="allowedPageSizes"
+    [displayMode]="displayMode"
+    [showPageSizeSelector]="showPageSizeSelector"
+    [showInfo]="showInfo"
+    [showNavigationButtons]="showNavButtons"
+  >
+  </dxo-pager>
+    <dxi-column dataField="inventoryId" caption="Registro" fixed="true" [allowEditing]="false" >
+    </dxi-column>
+    <dxi-column dataField="numberPallet" caption="Tarima" fixed="true" groupIndex="0">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
+    <dxi-column dataField="numberBatch" caption="No.Lote" fixed="true">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
+    <dxi-column dataField="date" caption="Fecha" fixed="true" dataType="date" sortOrder="asc">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
+    <dxi-column dataField="noBoxes" caption="No.Cajas(Stock)" fixed="true" [calculateDisplayValue]="getStockColumn">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
+    <dxi-column dataField="noIssues" [visible]="false">
+    </dxi-column>
+    <dxi-column dataField="stock" [visible]="false">
+    </dxi-column>
+    <dxi-column dataField="barcode" caption="Código" fixed="true">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
     <dxi-column dataField="caliber.id" caption="Calibre" fixed="true">
         <dxo-lookup [dataSource]="calibers" valueExpr="id" displayExpr="nameCaliber"></dxo-lookup>
+        <dxi-validation-rule type="required"></dxi-validation-rule>
     </dxi-column>
     <dxi-column dataField="variety.id" caption="Variedad" fixed="true">
         <dxo-lookup [dataSource]="variety" valueExpr="id" displayExpr="nameVariety"></dxo-lookup>
+        <dxi-validation-rule type="required"></dxi-validation-rule>
     </dxi-column>
     <dxi-column dataField="quality.id" caption="Calidad" fixed="true">
         <dxo-lookup [dataSource]="quality" valueExpr="id" displayExpr="nameQuality"></dxo-lookup>
+        <dxi-validation-rule type="required"></dxi-validation-rule>
     </dxi-column>
     <dxi-column dataField="typeBox.id" caption="Tipo" fixed="true">
         <dxo-lookup [dataSource]="typebox" valueExpr="id" displayExpr="nameTypeBox"></dxo-lookup>
+        <dxi-validation-rule type="required"></dxi-validation-rule>
     </dxi-column>
     <dxi-column dataField="client.id" caption="Cliente" fixed="true">
         <dxo-lookup [dataSource]="client" valueExpr="id" displayExpr="name"></dxo-lookup>
+        <dxi-validation-rule type="required"></dxi-validation-rule>
     </dxi-column>
+
+    <dxo-summary>
+        <dxi-total-item
+            column="noBoxes"
+            summaryType="sum">
+        </dxi-total-item>
+        <dxi-total-item
+        column="numberPallet"
+        summaryType="count">
+        </dxi-total-item>
+    </dxo-summary>
 
     <dxo-editing
         mode="popup"   

@@ -12,11 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class VigilanteGuard implements CanActivate {
 
-  private role;
-
   constructor(private cookieService: CookieService, private router: Router){
-    this.role = localStorage.getItem('role');
-    console.log(this.role);
   }
 
   redirect(cookie: boolean): boolean{
@@ -24,8 +20,7 @@ export class VigilanteGuard implements CanActivate {
       this.router.navigate(['/', 'login']);
       return false;
     }else{
-      if(this.role != 'Admin'){
-        this.router.navigate(['/', 'userhome']);
+      if(localStorage.getItem('role') != 'Admin'){
         return false;
       } else {
         return true;

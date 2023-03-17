@@ -6,11 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserVigilanteGuard implements CanActivate {
-  private role;
 
   constructor(private router: Router){
-    this.role = localStorage.getItem('role');
-    console.log(this.role);
   }
 
   redirect(cookie: boolean): boolean{
@@ -18,10 +15,13 @@ export class UserVigilanteGuard implements CanActivate {
       this.router.navigate(['/', 'login']);
       return false;
       }else{
+      if(localStorage.getItem('role') != 'User'){
+      return false;
+      } else {
       return true;
-      }   
+      }
     }
-  
+  }
 
   getUserRole(): string {
     const role = localStorage.getItem('role') ?? '';
