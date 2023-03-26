@@ -9,7 +9,7 @@ Armando Terán Castillo
 * [LinkedIn](https://www.linkedin.com/in/armandoterancastillo/)
 * [Github](https://github.com/ArmandoTeranCastillo)
 ## Instalación
-Este proyecto más que una simple migración en la terminal NuGet en la api .NetCore.
+Este proyecto no requiere más que una simple migración en la terminal NuGet en la api .NetCore.
 Se puede realizar con los comandos:
 
 > dotnet ef migrate
