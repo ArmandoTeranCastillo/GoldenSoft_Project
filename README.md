@@ -6,8 +6,8 @@
 Sencillo sistema de administracion de inventario creado en .Net Core 6, Angular y Devextreme
 ## Autor
 Armando Terán Castillo 
-* LinkedIn
-* Github
+* [LinkedIn](https://www.linkedin.com/in/armandoterancastillo/)
+* [Github](https://github.com/ArmandoTeranCastillo)
 ## Instalación
 Este proyecto más que una simple migración en la terminal NuGet en la api .NetCore.
 Se puede realizar con los comandos:
