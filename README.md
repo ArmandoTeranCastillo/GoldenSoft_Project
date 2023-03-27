@@ -9,8 +9,8 @@ Armando Terán Castillo
 * [LinkedIn](https://www.linkedin.com/in/armandoterancastillo/)
 * [Github](https://github.com/ArmandoTeranCastillo)
 ## Instalación
-Este proyecto no requiere más que una simple migración en la terminal NuGet en la api .NetCore.
-Se puede realizar con los comandos:
+Este proyecto no requiere más que una simple migración y actualización en la terminal NuGet en la api .NetCore.
+Asegúrate de contar con Microsoft SQL Server instalado en tu ordenador.
 
 > dotnet ef migrate
 
